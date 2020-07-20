@@ -1,0 +1,7 @@
+xlc -S -I./ -W "c,metal" wtoexec.c
+
+is the same as 
+
+xlc -S -I./ -W "c,metal" -qnosearch wtoexec.c
+
+xlc -S -W "c,metal,nosearch" wtoexec.c

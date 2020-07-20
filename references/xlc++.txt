@@ -1,0 +1,2302 @@
+  z/OS V2.4 XL C/C++
+
+
+  NAME
+         xlC, xlC_x, xlC_64, xlc++, xlc++_x, xlc++_64, c++, c++_x,
+         c++_64, cxx, cxx_x, cxx_64, xlc, xlc_x, xlc_64, cc, cc_x,
+         cc_64, c89, c89_x, c89_64, c99, c99_x, c99_64 - invoke the
+         IBM XL C/C++ compiler.
+
+  SYNOPSIS
+         xlC      [ option | inputfile ] ...
+         xlC_x    [ option | inputfile ] ...
+         xlC_64   [ option | inputfile ] ...
+         xlc++    [ option | inputfile ] ...
+         xlc++_x  [ option | inputfile ] ...
+         xlc++_64 [ option | inputfile ] ...
+         c++      [ option | inputfile ] ...
+         c++_x    [ option | inputfile ] ...
+         c++_64   [ option | inputfile ] ...
+         cxx      [ option | inputfile ] ...
+         cxx_x    [ option | inputfile ] ...
+         cxx_64   [ option | inputfile ] ...
+         xlc      [ option | inputfile ] ...
+         xlc_x    [ option | inputfile ] ...
+         xlc_64   [ option | inputfile ] ...
+         cc       [ option | inputfile ] ...
+         cc_x     [ option | inputfile ] ...
+         cc_64    [ option | inputfile ] ...
+:CEE5206S The signal SIGINT was received.
+/a/kelda16/native/node/hello-wto:xlc++ -h
+FSUM3208 xlc++: Command option -h is missing a subargument.
+/a/kelda16/native/node/hello-wto:xlc++ --help
+FSUM3216 xlc++: Command option --help is not recognized - passed to ld.
+FSUM7261 cygwin: Unknown terminal type, using dumb.
+
+  z/OS V2.4 XL C/C++
+
+
+  NAME
+         xlC, xlC_x, xlC_64, xlc++, xlc++_x, xlc++_64, c++, c++_x,
+         c++_64, cxx, cxx_x, cxx_64, xlc, xlc_x, xlc_64, cc, cc_x,
+         cc_64, c89, c89_x, c89_64, c99, c99_x, c99_64 - invoke the
+         IBM XL C/C++ compiler.
+
+  SYNOPSIS
+         xlC      [ option | inputfile ] ...
+         xlC_x    [ option | inputfile ] ...
+         xlC_64   [ option | inputfile ] ...
+         xlc++    [ option | inputfile ] ...
+         xlc++_x  [ option | inputfile ] ...
+         xlc++_64 [ option | inputfile ] ...
+         c++      [ option | inputfile ] ...
+         c++_x    [ option | inputfile ] ...
+         c++_64   [ option | inputfile ] ...
+         cxx      [ option | inputfile ] ...
+         cxx_x    [ option | inputfile ] ...
+         cxx_64   [ option | inputfile ] ...
+         xlc      [ option | inputfile ] ...
+         xlc_x    [ option | inputfile ] ...
+         xlc_64   [ option | inputfile ] ...
+         cc       [ option | inputfile ] ...
+         cc_x     [ option | inputfile ] ...
+         cc_64    [ option | inputfile ] ...
+         c89      [ option | inputfile ] ...
+         c89_x    [ option | inputfile ] ...
+         c89_64   [ option | inputfile ] ...
+         c99      [ option | inputfile ] ...
+         c99_x    [ option | inputfile ] ...
+         c99_64   [ option | inputfile ] ...
+
+  DESCRIPTION
+         Any of the commands listed above can be used to compile C
+         and C++ source files. They also process assembler source
+         files and object files. Unless the -c option is specified,
+         the xlc utility invokes the binder to produce a single
+         executable file or a DLL.
+
+         An input file may have any of the following
+         default suffixes:
+
+         .C     = C++ source file or C source host file
+         .c     = C source file
+         .i     = preprocessed C or C++ source file
+         .o     = object file for the binder/IPA link
+         .s     = assembler source file
+         .a     = archive library
+         .p     = prelinker output file
+         .I     = IPA Link output file
+         .x     = definition side file (sidedeck)
+         .CXX   = C++ source host file
+         .CEX   = preprocessed C or C++ source host file
+         .OBJ   = object host file for the binder/IPA link
+         .ASM   = assembler source host file
+         .LIB   = host archive library
+         .CPOBJ = prelinker output host file
+         .IPA   = IPA Link output host
+         .EXP   = host definition side file (sidedeck)
+
+  OPTIONS
+         Options can be flag options or keyword options:
+
+  Flag options
+
+         -#     Displays language processing commands but does not
+                invoke them; output goes to stdout.
+
+         -+     Treats .c files as C++ source code.
+
+         -B<prefix>
+                Constructs alternate compiler, IPA Link, assembler,
+                and binder program names.  <prefix> is added to the
+                beginning of the standard program names.
+                Note: This option cannot be used to select a
+                different version of the compiler. Use the steplib
+                attribute in the configuration file to select a
+                different version of the compiler.
+
+         -C     Preserves comments in preprocessed output, if used
+                with -E or -P.
+
+         -c     Does not send object files to the link editor.
+
+         -D<name>[=[<def>]]
+                Defines <name> as in the #define directive.
+                -D<name>= (no definition) is equivalent to:
+                #define <name>.
+                -D<name> (no = and no definition) is equivalent to:
+                #define <name> 1.
+
+         -E     Preprocesses but does not compile; output goes to
+                stdout.
+
+         -e     Sets the entry name for an executable.
+
+         -F{<filename>|<filename>:<stanza>|:<stanza>}
+                Uses the specified stanza of the specified
+                configuration file.  If :<stanza> is omitted, the
+                command name is used.  If <filename> is omitted the
+                default configuration file is used.
+
+         -g     Generates information for debugging tools. The
+                information is produced in DWARF format. The -g
+                option is equivalent to -qdebug=level=0, and it
+                forces -qnooptimize.
+
+         -g#    Generates information for debugging tools at an
+                optimization level. # is an integer in the range of
+                0 to 9 inclusive, indicating the amount of debug
+                information produced. -g0 is equivalent to
+                -qnodebug. -g# is equivalent to -qdebug<level>,
+                where # is 1 to 9 inclusive.
+
+         -I<dir>
+                Searches in directory <dir> for include files that
+                do not start with an absolute path.
+
+         -L<dir>
+                Searches in directory <dir> for files specified by
+                -l<key>.
+
+         -l<key>
+                Searches the file lib<key>.a for static linking.
+
+         -M     Generates a make dependency file. Specifying this
+                option is equivalent to specifying the -qmakedep
+                option with no suboption.
+
+         -MF<file_name>
+                Provides a path name of a file in which the
+                compiler should emit dependency information when
+                the -M option is in effect. <file_name> identifies
+                the make dependency file. It can be a UNIX System
+                Services file name, an existing directory name with
+                write permission, or a directory followed by a file
+                name.
+
+         -MG    Instructs the compiler to include missing header
+                files into the make dependency output file when the
+                -M option is in effect.
+
+         -MQ<target_name>
+                Sets the target to the <target_name> and escapes
+                any characters that have special meaning in make.
+
+         -MT<target_name>
+                Sets the target to the <target_name> rather than
+                the object file name when the -M option is in
+                effect.
+
+         -O     Optimizes generated code.
+
+         -O2    Same as -O.
+
+         -O3    Performs some memory and compile time intensive
+                optimizations in addition to those executed with
+                -O2.  The -O3 specific optimizations have the
+                potential to alter the semantics of a user's
+                program.  The compiler guards against these
+                optimizations at -O2 and the option -qstrict is
+                provided at -O3 to turn off these aggressive
+                optimizations.
+
+         -O4    Equivalent to -O3 -qipa -qhot.
+
+         -O5    Equivalent to -O3 -qipa=level=2 -qhot.
+
+         -o<name>
+                Names the executable file <name> instead of a.out.
+                When used with the -c option and one source file,
+                names the object file <name> instead of filename.o.
+                When used with the -qmetal and -S options, names
+                the assembler file instead of filename.s.
+                When used with the -qmetal, -S, and -qipa options,
+                names the assembler file produced by IPA link.
+
+         -P     Preprocesses but does not compile; output goes to a
+                file whose name is based on the source file name
+                and has a suffix .i for preprocessed output.
+
+         -r     Produces a relocatable object.
+
+         -s     Strips the symbol table, line number information,
+                and relocation information from the output file.
+
+         -S     Produces an assembler source file for C source that
+                is compiled with the -qmetal compiler option. -S is
+                only valid when -qmetal is specified, and it is not
+                valid for the IPA compile step.
+
+         -t<x>  Applies the prefix from the -B option to the
+                specified program <x>, where x can be one or more
+                of the following:
+
+                a = Assembler
+                c = compiler
+                L = inter-procedural analysis - link phase
+                l = binder
+                Note: This option can only affect programs which
+                can be invoked with a UNIX command (for example, as
+                and ld).
+
+         -U<name>
+                Undefines <name> as in the #undef directive.
+
+         -V     Reports the progress of compilation, by naming the
+                programs being invoked and the options being
+                specified to each program. Information is displayed
+                in a space-separated list.
+
+         -v     Reports the progress of compilation, by naming the
+                programs being invoked and the options being
+                specified to each program. Information is displayed
+                in a comma-separated list.
+
+         -W<x>,<option1>,<option2>,...
+                Gives the specified options to the program <x>
+                where x can be one of the following:
+
+                a = Assembler
+                c = compiler
+                L = inter-procedural analysis - link phase
+                l = binder
+
+  Keyword options
+         Keyword options are specified using the following syntax:
+
+         -q<option>[=<parm>[=<value>][:<parm>[=<value>]]...]
+
+         where <option> is an option name, <parm> is a suboption
+         name, and <value> is the suboption value.
+
+         Keyword options with no parameters represent switches that
+         can be either on or off. The keyword by itself turns the
+         switch on, and the keyword preceded by the letters NO
+         turns the switch off. For example, -qLIST tells the
+         compiler to produce a listing and -qNOLIST tells the
+         compiler not to produce a listing. If an option that
+         represents a switch is set more than once, the compiler
+         uses the last setting.
+
+         Keyword option and parameter names may appear in mixed
+         case letters in the invocation command.
+
+         -q32   Selects 32-bit compiler mode.
+
+         -q64   Selects 64-bit compiler mode.
+
+         -qaggrcopy={overlap|nooverlap}
+                Enables destructive copy operations for structures
+                and unions, which can improve performance.
+                The default is -qaggrcopy=nooverlap.
+
+         -qaggregate[= offsetdec | offsethex] | -qnoaggregate (C only)
+                Lists structures and unions, and their sizes.
+                The available suboptions are:
+
+                offsetdec
+                     Lists the structure member offsets in decimal
+                     format.
+                offsethex
+                     Lists the structure member offsets in
+                     hexadecimal format.
+
+                The default is -qnoaggregate.
+
+         -qalias[=[<name>]] | -qnoalias (C only)
+                Generates ALIAS binder control statements, which
+                help the binder locate modules in a load library,
+                for each required entry point. It uses a NAME
+                control statement in the form:
+                NAME <name> (R)
+                The default is -qnoalias.
+
+         -qansialias | -qnoansialias
+                Indicates to the compiler that the code strictly
+                follows the type-based aliasing rule in the ISO C
+                and C++ standards, and can therefore be compiled
+                with higher performance optimization.
+                The default is -qansialias.
+
+         -qarch=<option>
+                Specifies the machine architecture for which the
+                executable program instructions are to be
+                generated.
+                The available options are:
+
+                0  Produces code that is executable on all models.
+                1  Produces code that uses instructions available
+                   on the following system machine models:
+                   *  9021-520, 9021-640, 9021-660, 9021-740,
+                      9021-820, 9021-860, and 9021-900
+                   *  9021-xx1 and 9021-xx2
+                   *  9672-Rx1, 9672-Rx2 (G1), 9672-Exx, and 9672-
+                      Pxx
+                2  Produces code that uses instructions available
+                   on the following system machine models:
+                   *  9672-Rx3 (G2), 9672-Rx4 (G3), 9672-Rx5 (G4),
+                      and 2003
+                3  Produces code that uses instructions available
+                   on the 9672-xx6 (G5), 9672-xx7 (G6), and
+                   follow-on models.
+                4  Produces code that uses instructions available
+                   on the 2064-xxx (z/900) and 2066-xxx (z800)
+                   models in ESA/390 mode.
+                5  Produces code that uses instructions available
+                   on the 2064-xxx (z/900) and 2066-xxx (z800)
+                   models in z/Architecture mode.
+                6  Produces code that uses instructions available
+                   on the 2084-xxx (z990) and 2086-xxx (z890)
+                   models in z/Architecture mode.
+                7  Produces code that uses instructions available
+                   on the 2094-xxx (IBM System z9 Enterprise Class (z9EC)) and 2096-xxx
+                   (IBM System z9 Business Class (z9BC)) models in z/Architecture mode
+                   (specifically instructions introduced by the
+                   extended-immediate and decimal floating-point
+                   facilities).
+                8  Produces code that uses instructions available
+                   on the 2097-xxx (IBM System z10 Enterprise Class (z10EC)) and 2098-xxx
+                   (IBM System z10 Business Class (z10BC)) models in z/Architecture
+                   mode (specifically instructions introduced by
+                   the general instruction extensions and decimal
+                   floating-point facilities).
+                9  Produces code that uses instructions available
+                   on the 2817-xxx (IBM zEnterprise 196 (z196)) and
+                   2818-xxx (IBM zEnterprise 114 (z114)) models in
+                   z/Architecture mode (specifically instructions
+                   introduced by the high-word facility, the
+                   interlocked-access facility, the load/store-on-
+                   condition facility, the distinct-operands-
+                   facility, and the population-count facility).
+                10 Produces code that uses instructions available on the 2827-xxx (IBM
+                   zEnterprise EC12 (zEC12)) and 2828-xxx (IBM
+                   zEnterprise BC12 (zBC12))models in
+                   z/Architecture mode (specifically instructions
+                   introduced by the execution-hint facility, the
+                   load-and-trap facility, the miscellaneous-
+                   instructions-extension facility, and the
+                   transactional-execution facility).
+                11 Produces code that uses instructions available
+                   on the 2964-xxx (IBM z13 (z13)) and 2965-xxx
+                   (IBM z13s (z13s)) models in z/Architecture mode
+                   (specifically instructions introduced by the
+                   vector facility, the decimal floating point
+                   packed conversion facility, the load/store-on-
+                   condition facility 2, and the conditional-
+                   transaction-end facility).
+                12 Produces code that uses instructions available
+                   on the 3906-xxx (IBM z14 (z14)) and 3907-xxx
+                   (IBM z14 Model ZR1) models in
+                   z/Architecture mode. Specifically, these ARCH(12)
+                   machines and their follow-ons add instructions
+                   supported by the vector enhancement facility 1,
+                   the vector packed decimal facility, and the miscellaneous
+                   instruction extension facility 2. The VECTOR
+                   option is required for the compiler to use the
+                   vector enhancement facility 1 and vector packed
+                   decimal facility. For further information about
+                   these facilities, see z/Architecture Principles
+                   of Operation.
+                13 Produces code that uses instructions available on
+                   the 8561-xxx (IBM z15) models in z/Architecture mode.
+                   Specifically, these ARCH(13) machines and their
+                   follow-ons add instructions supported by the vector
+                   enhancement facility 2, vector packed decimal enhancement
+                   facility, and the miscellaneous instruction extensions
+                   facility 3. For further information about these facilities,
+                   see z/Architecture Principles of Operation.
+
+                   The default is -qarch=10.
+
+                If the -qarch option is specified without the
+                -qtune=<option>, the compiler uses the default
+                -qtune value for the specified architecture. See
+                z/OS XL C/C++ User's Guide to find the actual
+                default setting of -qtune for a given -qarch.
+
+         -qarchitecture
+                Not supported. Use -qarch instead.
+
+         -qargparse | -qnoargparse
+                Parses arguments provided on the invocation line.
+                The default is -qargparse.
+
+         -qarmode | -qnoarmode (C only)
+                Specifies that all functions in the C source file
+                will operate in access-register (AR) mode.
+                The default is -qnoarmode.
+                This option is meaningful only if the -qmetal and
+                -S flag options are specified.
+
+         -qascii | -qnoascii
+                Enables your application to process ASCII data
+                natively at execution time.
+                The default is -qnoascii.
+
+         -qasm | -qnoasm
+                Enables embedded assembler source inside C/C++
+                programs.
+                The default is -qnoasm.
+
+         -qasmds=<num> | -qasmdatasize=<num> (C only)
+                Provides the default data area size for the data
+                areas defined by user-supplied assembly statements.
+                The suboption <num> is an integer from 0 to
+                INT_MAX.
+                This option is meaningful only if the -S flag
+                option is in effect. The option is ignored silently
+                when -S is not specified.
+                The default is 256.
+
+         -qasmlib=<path1>[:<path2>:...:<pathN>] | -qnoasmlib
+                Specifies assembler macro libraries to be used when
+                assembling the assembler source code.
+                The default is -qnoasmlib.
+
+         -qassert={restrict|norestrict}
+                Enables/disables optimization for restrict
+                qualified pointers. The suboption restrict enables,
+                while norestrict disables optimization for restrict
+                qualified pointers.
+                The default is -qassert=restrict.
+
+         -qattribute (C++ only)
+                The same as option -qattr.  To be compatible with
+                AIX, the use of -qattr is recommended.
+
+         -qattr[=full] | -qnoattr (C++ only)
+                Produces a compiler listing that includes the
+                attribute component of the attribute and cross-
+                reference section of the listing. The listing
+                contains all names (-qattr=full) or only the names
+                that are referenced (-qattr). Output goes to a
+                listing file.
+                The default is -qnoattr.
+
+         -qbitfield
+                Not supported. Use -qbitfields instead.
+
+         -qbitfields={signed|unsigned}
+                Specifies whether bitfields will be signed or
+                unsigned.
+                The default is -qbitfields=unsigned.
+
+         -qchars={signed|unsigned}
+                Determines whether all variables of type char are
+                treated as either signed or unsigned.
+                The default is -qchars=unsigned.
+
+         -qchecknew | -qnochecknew
+                Controls whether a null pointer check is performed
+                on the pointer that is returned by an invocation of
+                the throwing versions of operator new and operator
+                new[].
+                The default is -qnochecknew.
+
+         -qcheckout
+                Not supported. Use -qinfo instead.
+
+         -qcics[=<CICS_opt1>:...:<CICS_optN>] | -qnocics
+                Enables CICS statements to be embedded in C/C++
+                source and passes them through the compiler without
+                the need for an explicit preprocessing step.
+                The default is -qnocics.
+
+         -qcompact | -qnocompact
+                Avoids optimizations that increase object file size.
+                The default is -qnocompact.
+
+         -qcompress | -qnocompress
+                Suppresses the generation of function names in the
+                function control block to reduce the size of the
+                application's load module.
+                The default is -qnocompress.
+
+         -qconvlit[=<code_page>:{wchar|nowchar|unicode}]
+             | -qnoconvlit
+                Changes the assumed codepage for character and
+                string literals within the compilation unit.
+                The default is -qconvlit=IBM-1047:nowchar.
+
+         -qcpluscmt | -qnocpluscmt (C only)
+                Permits "//" to introduce a comment that lasts
+                until the end of the current source line, as in
+                C++.
+                The default is -qnocpluscmt. The default for C99
+                and higher language levels is -qcpluscmt.
+
+         -qcsect[=[<qualifier>]] | -qnocsect
+                Ensures that the code, static data, and test
+                sections of the object module are named based on
+                <qualifier>, or if the <qualifier> is not
+                specified, using a default scheme. If -qgoff is
+                specified the default is -qcsect=, otherwise it is
+                -qnocsect.
+
+         -qcvft | -qnocvft (C++ only)
+                Shrinks the size of the writeable static area
+                (WSA), and reduces the size of construction virtual
+                function tables (CVFT), which in turn reduces the
+                load module size to improve your application's
+                performance.
+                The default is -qcvft.
+
+         -qdbrmlib[=<name>]
+                Specifies <name> as the name of a file used by the
+                database request module (DBRM). Valid only when
+                -qsql is also specified. The <name> can be one of
+                the following supported types:
+
+                Partitioned data set
+                Partitioned data set (member)
+                z/OS UNIX System Services file name
+                z/OS UNIX System Services directory
+
+         -qdebug[=<opt1>:...:<optN>] | -qnodebug
+                Instructs the compiler to generate debug
+                information. The available options are:
+
+                format={isd|dwarf}
+                     Specifies the format of debug information.
+                     The default format is dwarf.
+
+                file | nofile
+                     Controls whether the DWARF debugging
+                     information is stored in a separate debug
+                     file. The output file can be a sequential data
+                     set, a partitioned data set, a partitioned
+                     data set (member), a z/OS UNIX file, or a z/OS
+                     UNIX System Services directory.
+                     When specified with the GOFF and
+                     DEBUG(FORMAT(DWARF)) options, the NOFILE
+                     suboption instructs the compiler to place the
+                     debugging information in the GOFF NOLOAD
+                     classes in the object file instead of a
+                     separate debug side file.
+                level=<level>
+                     Controls the amount of debug information
+                     produced. Valid values for <level> are:
+                     0  If -qoptimize is specified, equivalent to
+                        level=2. If -qnooptimize is specified,
+                        equivalent to -qnodebug.
+                     1  Generates minimal read-only debugging
+                        information about line numbers and source
+                        file names. No program state is preserved.
+                     2  Generates read-only debugging information
+                        about line numbers, source file names, and
+                        symbols. When -qoptimize=2 is specified, no
+                        program state is preserved.
+                     3, 4
+                        Generates read-only debugging information
+                        about line numbers, source file names, and
+                        symbols. When -qoptimize=2 is specified, no
+                        program state is preserved, and function
+                        parameter values are available to the
+                        debugger at the beginning of each function.
+                     5, 6, 7
+                        Generates read-only debugging information
+                        about line numbers, source file names, and
+                        symbols. When -qoptimize=2 is specified,
+                        program state is available to the debugger
+                        at if-endif constructs, loop constructs,
+                        procedure calls, and function calls, and
+                        function parameter values are available to
+                        the debugger at the beginning of each
+                        function.
+                     8  Generates read-only debugging information
+                        about line numbers, source file names, and
+                        symbols. When -qoptimize=2 is specified,
+                        program state is available to the debugger
+                        at the beginning of every executable
+                        statement, and function parameter values
+                        are available to the debugger at the
+                        beginning of each function.
+                     9  Generates debugging information about line
+                        numbers, source file names, and symbols.
+                        Modifying the value of a variable in the
+                        debugger is allowed and respected. When
+                        -qoptimize=2 is specified, program state is
+                        available to the debugger at the beginning
+                        of every executable statement, and function
+                        parameter values are available to the
+                        debugger at the beginning of each function.
+
+                     The default is level=0.
+                hook[=<hook_type>] | nohook
+                     Controls the generation of hooks. Available
+                     hook types are:
+                     line | noline
+                          Generates hooks at most executable
+                          statements.
+                     block | noblock
+                          Generates block entry and exit hooks.
+                     path | nopath
+                          Generates hooks at path points.
+                     call | nocall
+                          Generates hooks at function call and
+                          return locations.
+                     func | nofunc
+                          Generates hooks at function entry and
+                          exit locations.
+                     none Generates no hooks.
+                     profile
+                          Generates call and func hooks.
+                     all  Generates all hooks.
+                symbol | nosymbol
+                     Generates information for variables and other
+                     symbols. For optimized code, the results are
+                     not always well defined for every variable
+                     because the compiler might have optimized away
+                     their use.
+
+                The default is -qnodebug.
+
+         -qdefine
+                Not supported. Use -D flag option instead.
+
+         -qdfp | -qnodfp
+                Provides support for decimal floating-point types.
+                The default is -qnodfp.
+
+         -qdigraph | -qnodigraph
+                Enables recognition of digraph key combinations or
+                keywords to represent characters not found on some
+                keyboards.
+                The default is -qdigraph.
+
+         -qdll[={callbackany|nocallbackany}] | -qnodll
+                Produces DLL code. If callbackany is specified, all
+                calls through function pointers will accommodate
+                function pointers created by applications compiled
+                without the dll option.
+                The default for C is -qnodll. The default for C++
+                is -qdll=nocallbackany.
+
+         -qdollar | -qnodollar
+                Controls whether the dollar-sign ($) symbol can be
+                used in the names of identifiers.
+
+         -qdsauser[=[<value>]] | -qnodsauser (C only)
+                Requests a user field to be reserved on the stack
+                when -qmetal is in effect.
+
+                <value>
+                     An integer in the range of 0 to 50. If a
+                     <value> is specified with DSAUSER, a user
+                     field with the size of <value> 32-bit words is
+                     allocated.
+
+                The default is -qnodsauser.
+
+         -qeh | -qnoeh (C++ only)
+                Generates C++ exception handling code.
+                The default is -qeh.
+
+         -qenum=<option>
+                Specifies the amount of storage occupied by
+                enumerations:
+
+                small
+                     1, 2, 4, or 8 (valid in 64-bit mode only)
+                     bytes of storage will be allocated for enum
+                     variables based on the range of the enum
+                     constants.
+                int  Enumerations occupy 4 bytes and are
+                     represented by int.
+                intlong
+                     (C++) Enumerations occupy 8 bytes and are
+                     represented by long if the range of the enum
+                     constants exceed the limit for int.
+                     Otherwise, the enumerations occupy 4 bytes of
+                     storage and are represented by int.
+                1    Enumerations occupy 1 byte.
+                2    Enumerations occupy 2 bytes.
+                4    Enumerations occupy 4 bytes.
+                8    Enumerations occupy 8 bytes.
+
+                The default is -qenum=small.
+
+         -qenumsize
+                Not supported. Use -qenum instead.
+
+         -qepilog[=<option>]=<text-string> (C only)
+                Allows you to provide your own function exit code
+                for all functions that have external linkage, or
+                for all extern and static functions. <text-string>
+                is a C string, which must contain valid HLASM
+                statements. The -qepilog option is only valid when
+                the -qmetal option is specified. The available
+                suboptions are:
+
+                extern
+                     If the -qepilog option is specified with this
+                     suboption or without any suboption, the epilog
+                     applies to all functions that have external
+                     linkage in the compilation unit.
+                all  If the -qepilog option is specified with this
+                     suboption, the epilog also applies to static
+                     functions defined in the compilation unit.
+
+                The default is the compiler generates default
+                epilog code for the functions that do not have
+                user-supplied epilog code.
+
+         -qevents[=<filename>] | -qnoevents
+                Creates an events file that contains error
+                information and source file statistics.  If
+                specified, <filename> is the name of the events
+                file, otherwise the events file is created in the
+                current directory using the source file name with
+                the suffix .err.
+                The default is -qnoevents.
+
+         -qexecops | -qnoexecops
+                Allows you to specify run-time options on the
+                invocation line for the generated executable.
+                The default is -qexecops.
+
+         -qexh  Not supported. Use -qeh instead.
+
+         -qexpmac | -qnoexpmac
+                Shows all expanded macros in the source listing.
+                The default is -qnoexpmac.
+
+         -qexportall | -qnoexportall
+                Exports all external functions and variables in the
+                compilation unit so that a DLL application can use
+                them.
+                The default is -qnoexportall.
+
+         -qfasttempinc | -qnofasttempinc (C++ only)
+                Defers generation of object code until the final
+                version of all template definitions has been
+                determined.  It may improve template instantiation
+                compilation time when large numbers of recursive
+                templates are used in an application compiled with
+                -qtempinc.
+                The default is -qnofasttempinc.
+
+         -qflag={i|w|e|s|u} | -qnoflag
+                Specifies the severity level of diagnostics to be
+                reported in source listing, and stderr.
+                The default is -qflag=i.
+
+         -qfloat=<opt1>[:<opt2>:...:<optN>]
+                Selects different strategies for speeding up or
+                improving the accuracy of floating-point
+                calculations, or selecting the format of the
+                floating point types. The available options are:
+
+                hex  Generates hexadecimal floating-point numbers
+                     and instructions.
+                ieee Generates binary floating-point numbers and
+                     instructions.
+                fold | nofold
+                     Suppresses compile-time evaluation of constant
+                     floating-point expressions.
+                     The default is fold.
+                maf | nomaf
+                     Suppresses generation of multiply-add
+                     instructions.
+                     The default is nomaf.
+                rrm | norrm
+                     Specifies run-time rounding mode. Compile with
+                     this option if the run-time rounding mode is
+                     round toward minus infinity, round toward
+                     positive infinity, or not known.
+                     The default is norrm.
+                afp | noafp
+                     Generates code which uses the full complement
+                     of 16 floating point registers.
+
+                The default for -qarch=2 is:
+                     -qfloat=hex:fold:nomaf:norrm:noafp
+                The default for -qarch=3 and higher is:
+                     -qfloat=hex:fold:nomaf:norrm:afp
+
+         -qfuncevent[={entrycall=<name1>,<name2>,...}]
+             | -qnofuncevent
+                Provides the appropriate LE notifications for each
+                specified function upon function entry.
+                The default is -qnofuncevent.
+
+         -qgoff | -qnogoff
+                Produces an object file in the generalized object
+                file format (GOFF).
+                The default is -qnogoff, but -qascii, -qxplink, and
+                -q64 force -qgoff.
+
+         -qgonumber | -qnogonumber
+                Generates line number tables that correspond to the
+                input source file for Debug Tool and CEEDUMP
+                processing.
+                If -qdebug is specified, the default is -qgonumber,
+                otherwise it is -qnogonumber.
+
+         -qhalt=<num>
+                When compiling members of a PDS or an HFS
+                directory, stops compilation if the return code
+                from compiling any member is greater than or equal
+                to <num>. Valid codes for <num> correspond to
+                return codes from the compiler. See z/OS XL C/C++
+                Messages for a list of return codes.
+                The default is -qhalt=16.
+
+         -qhaltonmsg=<msg>[:<msg1>:...:<msgN>] | -qnohaltonmsg
+                Stops compilation before producing any object,
+                executable, or assembler source files if a
+                specified error message is generated.
+                (C) A list of message numbers can be specified.
+                (C++) Only one message number can be specified.
+                The default is -qnohaltonmsg.
+
+         -qhgpr[={preserve|nopreserve}] | -qnohgpr
+                Enables exploiting 64-bit general purpose registers
+                for 32-bit applications targeting z/Architecture
+                hardware. The suboption preserve instructs the
+                compiler to preserve the high halves of the 64-bit
+                registers that a function is using, by saving them
+                in the prolog of the function and restoring them in
+                the epilog. For performance reasons the default
+                suboption is nopreserve.
+                The default is -qnohgpr.
+
+         -qhot | -qnohot
+                Specifies whether or not to perform high-order loop
+                analysis and transformations during optimization.
+                The default is -qnohot.
+
+         -qignerrno | -qnoignerrno
+                Allows the compiler to perform optimizations that
+                assume errno is not used by the application.
+                The default is -qnoignerrno.
+
+         -qilp32
+                Not supported. Use -q32 instead.
+
+         -qinclude=<file> | -qnoinclude
+                Specifies additional header files to be included in
+                a compilation unit, as though the files were named
+                in consecutive #include statements inserted before
+                the first line of the source file.
+                -qnoinclude ignores all the files specified with
+                the -qinclude option prior to the -qnoinclude
+                option.
+                The default is -qnoinclude.
+
+         -qinfo[={all|<groups>}] | -qnoinfo
+                Produces groups of informational messages.
+
+                all  Turns on all diagnostic messages for all
+                     groups except als and ppt.
+                     The default for -qinfo with no parameters is
+                     -qinfo=all.
+
+                You can specify the following groups:
+
+                als | noals
+                     Possible violations of the ANSI aliasing rule
+                     in effect
+                cls | nocls
+                     (C++) Possible problems with generation of
+                     classes
+                cmp | nocmp
+                     Possible redundancies in unsigned comparisons
+                cnd | nocnd
+                     Possible redundancies or problems in
+                     conditional expressions
+                cns | nocns
+                     Operations involving constants
+                cnv | nocnv
+                     Conversions
+                cpy | nocpy
+                     (C++) Missing copy constructors
+                eff | noeff
+                     Statements and pragmas with no effect
+                enu | noenu
+                     Consistency of enum variables
+                ext | noext
+                     Unused variables that have external
+                     definitions
+                gen | nogen
+                     General diagnostic messages
+                gnr | nognr
+                     (C++) Generation of temporary variables
+                lan | nolan
+                     Language level effects
+                par | nopar
+                     Unused parameters
+                por | nopor
+                     Nonportable language constructs
+                ppc | noppc
+                     Possible problems with using the preprocessor
+                ppt | noppt
+                     Trace of preprocessor actions
+                pro | nopro
+                     Missing function prototypes
+                rea | norea
+                     Code that cannot be reached
+                ret | noret
+                     Consistency of return statements
+                stp | nostp
+                     Emits warnings for procedures that are not
+                     protected against stack corruption.
+                trd | notrd
+                     Possible truncation or loss of data or
+                     precision
+                und | nound
+                     (C++) Undefined classes
+                use | nouse
+                     Unused automatic and static variables
+                vft | novft
+                     (C++) Generation of virtual function tables
+
+                The default is -qnoinfo for C and -qinfo=lan for
+                C++.
+
+         -qinitauto=<hh>[:word] | -qnoinitauto
+                Initializes automatic variables to a specific value
+                for debugging purposes. It initializes automatic
+                storage to <hh>, which can be two to eight
+                hexadecimal digits; word is optional and can be
+                abbreviated to w. If word is specified, <hh> is a
+                word initializer; otherwise it is a byte
+                initializer. This generates extra code and should
+                only be used for problem determination.
+                The default is -qnoinitauto.
+
+         -qinline[={auto|noauto}:{report|noreport}:<threshold>:<limit>]
+             | -qnoinline
+                Attempts to inline functions instead of generating
+                calls to those functions, for improved performance.
+                -qinline turns on inlining. -qnoinline turns off
+                inlining.
+                The available options are:
+
+                auto | noauto
+                       (C) The inliner runs in automatic mode and
+                       inlines subprograms within the <threshold>
+                       and <limit>.
+                report | noreport
+                       (C) Generates an inline report.
+                <threshold>
+                       (C) The maximum relative size of a
+                       subprogram to inline.
+                <limit>
+                       (C) The maximum relative size a subprogram
+                       can grow before auto-inlining stops.
+
+                If -qnooptimize is specified, the default is
+                -qnoinline; otherwise, the default is -qinline for
+                C++ compiles, and -qinline=auto:noreport:100:1000
+                for C compiles.
+
+         -qinlrpt[=<filename>] | -qnoinlrpt
+                Generates a report on the status of inlined
+                functions. If <filename> is specified, the report
+                is produced in the <filename> file, otherwise it is
+                produced in a file that has a name generated from
+                the source file name.
+                The default is -qnoinlrpt.
+
+         -qipa[=<opt1>[=<val1>]:...:<optN>[=<valN>]] | -qnoipa
+                Enables or customizes a class of optimizations
+                known as interprocedural analysis (IPA). It
+                enhances -O optimization by doing detailed analysis
+                across procedures. Suboptions include:
+
+                level=<level>
+                     Determines the amount of IPA analysis and
+                     optimization performed. Valid values for
+                     <level> are:
+                     0  Does only minimal interprocedural analysis
+                        and optimization.
+                     1  Turns on inlining, limited alias analysis,
+                        and limited call-site tailoring.
+                     2  Full interprocedural data flow and alias
+                        analysis.
+                attribute | noattribute
+                     Indicates whether the compiler saves
+                     information about symbols in the IPA object
+                     file.
+                     The default is noattribute.
+                compress | nocompress
+                     Indicates that the IPA object information is
+                     compressed to significantly reduce the size of
+                     the IPA object file.
+                     The default is compress.
+                gonumber | nogonumber
+                     Indicates whether the compiler saves
+                     information about source file line numbers in
+                     the IPA object file.
+                     The default is nogonumber.
+                list | nolist
+                     Indicates whether the compiler saves
+                     information about source line numbers in the
+                     IPA object file.
+                     The default is nolist.
+                object | noobject
+                     Controls the content of the object file.
+                     The default is noobject.
+                optimize | nooptimize
+                     The default is optimize.
+                xref | noxref
+                     Indicates whether the compiler saves
+                     information about symbols in the IPA object
+                     file that will be used in the IPA Link step if
+                     you specify -qattr -qxref on that step.
+                     The default is noxref.
+                control[=<filename>] | nocontrol
+                     Specifies whether a file that contains IPA
+                     directives is available for processing.  If an
+                     optional <filename> is specified, the file
+                     <filename> is used, otherwise ./ipa.ctl is
+                     used.
+                     The default is nocontrol. For information
+                     about the IPA control file directives, refer
+                     to the description of the IPA Link step
+                     control file in the z/OS XL C/C++ User's
+                     Guide.
+                dup | nodup
+                     Indicates whether the IPA Link step writes a
+                     message and a list of duplicate symbols to the
+                     console.
+                     The default is dup.
+                er | noer
+                     Indicates whether the IPA Link step writes a
+                     message and a list of unresolved symbols to
+                     the console.
+                     The default is noer.
+                map | nomap
+                     Specifies that the IPA Link step will produce
+                     a listing. The listing contains a Prolog and
+                     the following sections:
+                     * Object File Map
+                     * Compiler Options Map
+                     * Global Symbols Map
+                     * Partition Map for each partition
+                     * Source File Map
+                     The default is nomap.
+                ncal | noncal
+                     Indicates whether the IPA Link step performs
+                     an automatic library search to resolve
+                     references in files that the IPA Compile step
+                     produces. Also indicates whether the IPA Link
+                     step performs library searches to locate an
+                     object file or files that satisfy unresolved
+                     symbol references within the current set of
+                     object information.
+                     The default is noncal.
+                upcase | noupcase
+                     Determines whether the IPA Link step makes an
+                     additional automatic library call pass for
+                     SYSLIB if unresolved references remain at the
+                     end of standard IPA Link processing. Symbol
+                     matching is not case sensitive in this pass.
+                     The default is noupcase.
+                pdf1 | nopdf1
+                     Instruments the code for aggressive
+                     optimizations with profile directed feedback.
+                     The default is nopdf1.
+                pdf2 | nopdf2
+                     Uses profile data file to perform aggressive
+                     optimizations.
+                     The default is nopdf2.
+                pdfname=<filename> | nopdfname
+                     Specifies the name of the profile data file
+                     containing the PDF profiling information.
+                     The default is nopdfname.
+
+                The default is -qnoipa.
+
+         -qkeyword=<keyword> | -qnokeyword=<keyword>
+                Enables the use of a specific <keyword>.
+                The -qnokeyword=<keyword> option disables the use
+                of <keyword> as a keyword.
+
+
+         -qlanglvl={<langlvl>|<feature>}[:<langlvl>|<feature>]...
+                Determines whether source code and compiler options
+                should be checked for conformance to a specific
+                language standard, or subset, or superset of a
+                standard. Suboptions include:
+                <langlvl>
+                     (C) can be extended, commonc, ansi, saa,
+                     saal2, libext, extc89, stdc89, extc99, stdc99,
+                     extc1x, or longlong.
+                     (C++) can be ansi/strict98, compat92,
+                     extended, or extended0x.
+                     Defaults depend on the command used:
+                     c99  stdc99
+                     c89  ansi
+                     cc   commonc
+                     c++  extended, nolibext, nolonglong
+                     xlc  extended
+                <feature>
+                     (C) and (C++) can be:
+                          libext
+                               Use ISO runtime extensions.
+                          longlong
+                               Allows long long integer types.
+                          textafterendif
+                               Controls whether a message is
+                               emitted when there is any extraneous
+                               text after #else or #endif.
+                     (C++) can be:
+                          anonstruct
+                               Allows anonymous structs and
+                               anonymous classes.
+                          anonunion
+                               Allows non-data members in anonymous
+                               unions. Member functions are not
+                               allowed.
+                          ansifor
+                               Allows ANSI scopes to be used for
+                               variables declared in for-init-
+                               statements.
+                          ansisinit
+                               Generates code to handle the
+                               destructors for static
+                               initialization in the C++ standard
+                               way. This is the default. The
+                               noansisinit option can be used to
+                               generate code that is compatible
+                               with the Version 3 compiler.
+                          autotypededuction (C++11 only)
+                               Deduces the type of an auto variable
+                               from the type of its initializer
+                               expression.
+                               Note:
+                               IBM continues to develop and
+                               implement the features of the C++11
+                               standard. The implementation of the
+                               language level is based on IBM's
+                               interpretation of the standard.
+                               Until IBM's implementation of all
+                               the features of the C++11 standard
+                               is complete, the implementation may change
+                                                           from release to release. IBM makes no
+                               attempt to maintain compatibility,
+                               in source, binary, or listings and
+                               other compiler interfaces, with
+                               earlier releases of IBM's
+                               implementation of the new features
+                               of the C++11 standard and therefore
+                               they should not be relied on as a
+                               stable programming interface.
+                          c1xnoreturn
+                               Controls whether the _Noreturn
+                               function specifier is supported.
+                          c99__func__
+                               Enables the extension __func__.
+                          c99complex
+                               Controls whether C99 complex data
+                               types and related keywords are
+                               enabled.
+                          c99complexheader
+                               Controls whether the C99 complex.h
+                               header file is used.
+                          c99longlong (C++11 only)
+                               Controls whether the feature of C99
+                               long long with IBM extensions
+                               adopted in C++11 is enabled.
+                          c99preprocessor (C++11 only)
+                               Controls whether the C99
+                               preprocessor features adopted in
+                               C++11 are enabled.
+                          c99vla
+                               Allows variable length arrays.
+                          checkplacementnew
+                               Controls whether a null pointer
+                               check is performed on the pointer
+                               that is returned by an invocation of
+                               the reserved forms of the placement
+                               operator new and operator new[].
+                          compatrvaluebinding
+                               Instructs the compiler to allow a
+                               non-const reference to bind to an
+                               rvalue of a user-defined type where
+                               an initializer is not required.
+                          complexinit
+                               Controls whether the initialization
+                               of complex types is enabled.
+                          constexpr (C++11 only)
+                               Extends the expressions permitted
+                               within constant expressions.
+                          dbcs String literals and comments can
+                               contain DBCS characters.
+                          decltype (C++11 only)
+                               Controls whether the declaration
+                               type feature is enabled.
+                          defaultanddelete (C++11 only)
+                               Controls whether the defaulted and
+                               deleted functions feature is
+                               enabled.
+                          delegatingctors (C++11 only)
+                               Controls whether the delegating
+                               constructors feature is enabled.
+                          dependentbaselookup
+                               Controls whether the name lookup
+                               rules for a template base class of
+                               dependent type defined in the
+                               Technical Corrigendum 1 (TC1) of the
+                               C++ Standard apply.
+                          dollarinnames
+                               Allows dollar-sign character ($) in
+                               identifiers.
+                          emptystruct
+                               Tolerates empty member declarations.
+                          explicitconversionoperators (C++11 only)
+                               Applies the explicit function
+                               specifier to the definition of a
+                               user-defined conversion function,
+                               and thus inhibits unintended
+                               implicit conversions through the
+                               user-defined conversion function.
+                          extended0x (C++11 only)
+                               Enables support of the new version
+                               of the C++ standard (C++11).
+                          extendedfriend (C++11 only)
+                               Controls whether C++98 or C++11
+                               friend declarations are used.
+                          extendedintegersafe (C++11 only)
+                               Detects decimal integer literals
+                               that do not have a suffix containing
+                               u or U, and ensures that the
+                               literals can be represented by the
+                               long long int type.
+                          externtemplate (C++11 only)
+                               Allows explicit instantiation
+                               declarations to provide you with the
+                               ability to suppress implicit
+                               instantiations of template
+                               specializations or its members.
+                          gnu_complex
+                               Enables GNU complex data types and
+                               related keywords.
+                          gnu_computedgoto
+                               Enables support for computed goto
+                               statements.
+                          gnu_include_next
+                               Enables support of gcc Version 3's
+                               #include_next directive.
+                          gnu_labelvalue
+                               Enables support for labels as
+                               values.
+                          gnu_suffixij
+                               Enables support for GNU-style
+                               complex numbers.
+                          illptom
+                               Allows ill-formed pointers to member
+                               expressions.
+                          implicitint
+                               Allows implicit int.
+                          inlinenamespace (C++11 only)
+                               Controls whether the inline
+                               namespace definitions are enabled.
+                          newexcp
+                               Determines whether the system
+                               operator new (other than the nothrow
+                               variants) throws the standard
+                               exception std::bad_alloc when the
+                               requested allocation fails.
+                          nullptr
+                               Controls whether the nullptr feature
+                               is enabled.
+                          offsetnonpod
+                               Allows offsetof() to be used with
+                               non-POD (plain old data) classes.
+                          olddigraph
+                               Supports old-style digraphs.
+                          oldfriend
+                               Allows friend declarations without
+                               elaborated classnames.
+                          oldmath
+                               Prevents the inclusion of new ANSI
+                               math functions in <math.h>.
+                          oldstr
+                               Prevents the inclusion of new string
+                               functions in <cstring>.
+                          oldtempacc
+                               Suppresses copy-constructor access
+                               checking for eliminated temporaries.
+                          oldtmplalign
+                               Ignores alignment rules specified
+                               for nested templates.
+                          oldtmplspec
+                               Allows old-style template
+                               specializations.
+                          redefmac
+                               Controls whether a macro can be
+                               redefined.
+                          referencecollapsing (C++11 only)
+                               Controls whether the reference
+                               collapsing feature is enabled.
+                          rightanglebracket (C++11 only)
+                               Controls whether the right angle
+                               bracket feature is enabled.
+                          rvaluereferences (C++11 only)
+                               Controls whether the rvalue
+                               references feature is enabled.
+                          scopedenum (C++11 only)
+                               Controls whether the scoped
+                               enumeration feature is enabled.
+                          static_assert (C++11 only)
+                               Controls whether the static
+                               assertions feature is enabled.
+                          tempsaslocals
+                               Extends the lifetime of C++
+                               temporaries beyond which is
+                               specified in the C++ Language
+                               Standard.
+                          trailenum
+                               Allows trailing enum commas.
+                          typedefclass
+                               Allows typedef names to be used in
+                               base specifiers and in memory
+                               initializers.
+                          ucs  Enables support for universal
+                               character names.
+                          variadictemplates (C++11 only)
+                               Controls whether the variadic
+                               templates feature is enabled.
+                          varargmacros
+                               Enables support for C99-style
+                               variable argument lists in
+                               function-like macros.
+                          zeroextarray
+                               Allows a zero-extent array as the
+                               last non-static data member of a
+                               struct.
+
+         -qlibansi | -qnolibansi
+                Assumes that all functions with the name of an ANSI
+                C library function are in fact the system
+                functions.
+                The default is -qnolibansi.
+
+         -qlist[=<filename>] | -qnolist
+                Produces a compiler listing that includes a pseudo
+                assembly listing. If <filename> is specified output
+                goes to <filename> file, otherwise it goes to
+                stdout.
+                The default is -qnolist.
+
+         -qlocale[=<name>] | -qnolocale
+                Specifies the locale to be used by the compiler as
+                the current locale throughout the compilation unit.
+                The default is -qlocale=POSIX.
+
+         -qlonglong | -qnolonglong
+                Controls whether to allow the pre-C99 long long integer
+                types in your programs.
+                The default is -qlonglong.
+
+         -qlongname | -qnolongname
+                Generates untruncated and mixed case external names
+                in the object module produced by the compiler for
+                functions with non-C++ linkage.
+                The default is -qlongname for both C and C++
+                compiles.
+
+         -qlp64 Not supported. Use -q64 instead.
+
+         -qlsearch=<path1>[:<path2>:...:<pathN>] | -qnolsearch
+                Directs the preprocessor to look for the user
+                include files in the specified directories or data
+                sets.
+                The default is -qnolsearch.
+
+         -qmakedep[={gcc|pponly}]
+                Generates a make dependency file. Specifying this
+                option with no suboption is equivalent to specifying
+                the -M option. This option is available only when
+                using -q syntax. The available suboptions are:
+
+                gcc  Instructs the compiler to produce make
+                     dependency file format with a single rule for
+                     all dependencies. The default format uses
+                     multiple rules, one for each dependency.
+                pponly
+                     Instructs the compiler to produce only the
+                     make dependency files without generating an
+                     object file, with the same make dependency
+                     file format as the format produced by the gcc
+                     suboption.
+
+         -qmargins[=<n>:<m>] | -qnomargins
+                Specifies the columns in the input record that are
+                to be scanned for input to the compiler. The
+                available suboptions are:
+
+                <m>  Specifies the first column of the source input
+                     that contains valid z/OS C/C++ code. The value
+                     of <m> must be greater than 0 and less than
+                     32761.
+                <n>  Specifies the last column of the source input
+                     that contains valid z/OS C/C++ code. The value
+                     of <n> must be greater than <m> and less than
+                     32761. An asterisk (*) can be assigned to <n>
+                     to indicate the last column of the input
+                     record.
+
+                For C++, the default is -qnomargins.
+                For C(fixed record format), the default is
+                -qmargins=1:72.
+
+         -qmaxmem=<num>
+                Limits the amount of memory used by certain
+                memory-intensive optimizations to <num> kilobytes.
+                The default is -qmaxmem=2097152.
+
+         -qmemory | -qnomemory
+                Improves compile-time performance by using a memory
+                file in place of a temporary work file, if
+                possible.
+                The default is -qmemory.
+
+         -qmetal | -qnometal (C only)
+                This option instructs the compiler to generate
+                HLASM code that does not have a dependency on the
+                Language Environment runtime environment. This
+                option allows the C/C++ language to be used in
+                traditional MVS System Development scenarios.
+                The default is -qnometal.
+
+         -qnamemangling={ansi|zosv2r1m1_ansi|...|compat} (C++ only)
+                Specifies the name mangling scheme for external
+                symbol names which have C++ linkage:
+
+                ansi   This scheme complies with the C++ standard
+                       and is the default when the -q64 compiler
+                       option is specified.
+                zosv2r1m1_ansi
+                       This scheme is compatible with z/OS V2R1M1
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv2r1_ansi
+                       This scheme is compatible with z/OS V2R1
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r12_ansi
+                       This scheme is compatible with z/OS V1R12
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r11_ansi
+                       This scheme is compatible with z/OS V1R11
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r10_ansi
+                       This scheme is compatible with z/OS V1R10
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r9_ansi
+                       This scheme is compatible with z/OS V1R9
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r8_ansi
+                       This scheme is compatible with z/OS V1R8
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r7_ansi
+                       This scheme is compatible with z/OS V1R7
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r5_ansi
+                       This scheme is compatible with z/OS V1R5
+                       modules that were created with
+                       -qnamemangling=ansi.
+                zosv1r5_default
+                       This scheme is equivalent to the zosv1r2
+                       scheme.
+                zosv1r2
+                       This scheme is compatible with z/OS V1R2
+                       modules that were created with
+                       -qnamemangling=ansi. This name mangling
+                       scheme is the default when the -q32 compiler
+                       option is specified.
+                osv2r10
+                       This scheme is compatible with OS/390 C++
+                       V2R10 or previous modules that were created
+                       with -qnamemangling=compat.
+                compat This scheme is equivalent to the scheme used
+                       by the OS/390 V2R10 C++ compiler.
+
+                The default is:
+                -qnamemangling=zosv1r2
+                       If -qlanglvl=ansi, or -qlanglvl=extended, or
+                       -qlanglvl=extended0x is set.
+                -qnamemangling=compat
+                       If -qlanglvl=compat92 is set.
+                -qnamemangling=ansi
+                       If LP64 is set.
+
+         -qnestinc[=<num>] | -qnonestinc
+                Specifies the number of nested include files to be
+                allowed in your source program. The value of <num>
+                can be any integer from 0 to SHRT_MAX (defined in
+                the header file limits.h). To specify the maximum
+                limit, use an asterisk (*) for <num>.
+                The default is -qnestinc=255.
+
+         -qobject
+                Not supported. Use -c and -o instead.
+
+         -qobjectmodel
+                Not supported. Use -qobjmodel instead.
+
+         -qobjmodel={classic|ibm} (C++ only)
+                Sets the object model to be used for structures,
+                unions, and classes:
+
+                classic
+                     Provides binary compatibility with the older
+                     object model.
+                ibm  Provides improved performance.
+
+                The default is -qobjmodel=classic.
+
+         -qoe[=<path>] | -qnooe
+                Uses the POSIX.2 standard rules to search for files
+                named in the #include directives. The <path>
+                suboption enables specifying a path that is
+                different from the path of the source file being
+                compiled.
+                The default is -qoe.
+
+         -qoffset | -qnooffset
+                Displays the offset addresses relative to the entry
+                point or start of each function in the pseudo-
+                assembly listing.
+                The default is -qnooffset.
+
+         -qoptfile=<filename> | -qnooptfile
+                Looks for compiler options in the file specified by
+                the <filename> suboption.
+                The default is -qnooptfile.
+
+         -qoptimize[=<level>] | -qnooptimize
+                Enables different levels of optimization. The
+                available levels are:
+
+                0  (zero) same as -qnooptimize.
+                2  Same as -O and -qoptimize.
+                3  Same as -O3. Aggressive optimization.
+
+                The default is -qnooptimize.
+                When compiling with -qhot, -qipa, or -qsmp, the
+                default is -qoptimize=2.
+
+         -qpath=<program>:<path>
+                Constructs an alternate path name for the specified
+                program. <program> can be one of the following
+                characters:
+
+                a = Assembler
+                c = compiler
+                L = inter-procedural analysis - link phase
+                l = binder
+                Note: This option can only affect programs which
+                can be invoked with a UNIX command (for example, as
+                and ld).
+
+         -qpdf1 | -qnopdf1
+                Instruments the code for aggressive optimizations
+                with profile directed feedback. -qpdf1 is
+                equivalent to -qipa=pdf1. -qpdf1 must be used with
+                -qoptimize=2 or -qoptimize=3. -qpdf1 invokes the
+                IPA steps.
+                The default is -qnopdf1.
+
+         -qpdf2 | -qnopdf2
+                Uses profile data file to perform aggressive
+                optimizations. -qpdf2 is equivalent to -qipa=pdf2.
+                The default is -qnopdf2.
+
+         -qphaseid
+                The same as -qphsinfo.
+
+         -qphsinfo | -qnophsinfo
+                Issues an informational message for each compiler
+                component (phase) as the phase begins execution.
+                The message displays phase name, product
+                identification, and build level.
+                The default is -qnophsinfo.
+
+         -qplist={host:os}
+                Directs how the parameters from the caller are
+                passed to main(). The available options are:
+
+                host   Parameters are passed to main() as an
+                       argument list (argv, argc).
+                os     Parameters are passed without restructuring,
+                       and the standard calling conventions of the
+                       operating system are used.
+
+                The default is -qplist=host.
+
+         -qport[={pps|nopps}] | -qnoport (C++ only)
+                Enables adjusting the error recovery action that
+                the compiler takes when it encounters an ill-formed
+                #pragma pack directive. The available options are:
+
+                pps    Uses the strict error recovery mode.
+                nopps  Uses the default error recovery mode. This
+                       is the default.
+
+                The default is -qnoport.
+
+         -qpponly[=<opt1>:...:<optN> | -qnopponly
+                Specifies that only the preprocessor is to be run
+                against the source file. The available options are:
+
+                comments | nocomments
+                     Preserves comments in the preprocessed output.
+                     The default is nocomments.
+                lines | nolines
+                     Issues #line directives at include file
+                     boundaries, block boundaries and where there
+                     are more than 3 blank lines.
+                     The default is nolines.
+                <filename>
+                     The name for the preprocessed output file.
+                <n>  Folds all lines at column <n>, where <n> is an
+                     integer between 2 and 32760 inclusive.
+                *    Folds all lines at the maximum record length
+                     of 32760.  By default all lines are folded to
+                     fit into the output file, based on the record
+                     length of the output file.
+
+                The default is -qnopponly.
+
+         -qprefetch | -qnoprefetch
+                Inserts prefetch instructions automatically where
+                there may be opportunities to improve performance.
+                The default is -qprefetch.
+
+         -qprolog[=<option>]=<text-string> (C only)
+                Allows you to provide your own function entry code
+                for all functions that have external linkage, or
+                for all extern and static functions. <text-string>
+                is a C string, which must contain valid HLASM
+                statements. The -qprolog option is only valid when
+                the -qmetal option is specified. The available
+                suboptions are:
+
+                extern
+                     If the -qprolog option is specified with this
+                     suboption or without any suboption, the prolog
+                     applies to all functions that have external
+                     linkage in the compilation unit.
+                all  If the -qprolog option is specified with this
+                     suboption, the prolog also applies to static
+                     functions defined in the compilation unit.
+
+                The default is the compiler generates default
+                prolog code for the functions that do not have
+                user-supplied prolog code.
+
+         -qredir | -qnoredir
+                Enables redirecting stdin, stdout, and stderr from
+                the command line when invoking a program from TSO
+                or batch.
+                The default is -qredir.
+
+         -qrent | -qnorent (C only)
+                Supports constructed reentrancy for C programs with
+                writable static and external variables.
+                The default is -qrent.
+                This option is meaningful for METAL C applications
+                only if the -qgoff option is specified for the
+                assembly step.
+
+         -qreport | -qnoreport
+                Adds to the listing file a C-like representation of
+                optimized code when -qhot or -qipa are active.
+                The default is -qnoreport.
+
+         -qreserved_reg=<reg_number>
+             | -qres_reg=<reg_number> (C only)
+                This option is provided for compatibility with GCC.
+                It indicates that a given register cannot be used
+                during the compilation.
+
+                <reg_number> can be one of the general purpose
+                registers 0-15 (written as "r0","r1",...,"r15" or
+                "R0","R1",...,"R15")
+
+                Some general purpose registers have designated
+                roles in the compiler. Reserving these registers
+                may prevent the compiler from generating the
+                correct code.
+
+                General Purpose Registers that have designated
+                roles are:
+
+                r0   volatile
+                r1   parameter list pointer
+                r3   designated by the compiler
+                r10  used for addressing data
+                r11  used for addressing data
+                r13  save area pointer (stack pointer)
+                r14  function return address
+                r15  function entry point, return code, or integral
+                     type return value
+
+         -qrestrict | -qnorestrict (C only)
+                Indicates to the compiler that all pointer
+                parameters in some or all functions are disjoint.
+                The default is -qnorestrict.
+
+         -qro | -qnoro
+                Puts string literals in read-only storage.
+                The default is -qro.
+
+         -qroconst | -qnoroconst
+                Puts constant values in read-only storage.
+                The default is -qnoroconst for C compiles, and
+                -qroconst for C++ compiles.
+
+         -qrostring
+                Not supported. Use -qro instead.
+
+         -qround={n:m:p:z:dn:dm:dp:dz:dna:dnz:di}
+                Sets the rounding mode at compile time. Valid only
+                for IEEE and DFP floating-point mode compilations.
+                For HEX floating-point mode compilations the
+                rounding mode is always towards zero, and this
+                option is ignored with a warning message. The valid
+                rounding modes for IEEE floating-point types are:
+
+                n    Round to the nearest representable number.
+                m    Round towards minus infinity.
+                p    Round towards plus infinity.
+                z    Round towards zero.
+
+                The default is -qround=n.
+
+                The valid rounding modes for decimal floating-point
+                types are:
+
+                dn   Round to the nearest representable number,
+                     ties to zero
+                dm   Round towards minus infinity.
+                dp   Round towards plus infinity.
+                dz   Round towards zero.
+                dna  Round to nearest, ties away from zero
+                dnz  Round to nearest, ties toward zero
+                di   Round towards infinity (away from zero)
+
+                The default is -qround=dn.
+
+         -qrtcheck[=<option>] | -qnortcheck
+                Generates compare-and-trap instructions that
+                perform certain types of runtime checking. The
+                available options are:
+
+                all  Automatically generates compare-and-trap
+                     instructions for all possible runtime checks.
+                bounds | nobounds
+                     Performs runtime checking of addresses when
+                     subscripting within an object of known size.
+                divzero | nodivzero
+                     Performs runtime checking of integer division.
+                nullpr | nonullptr
+                     Performs runtime checking of addresses
+                     contained in pointer variables used to
+                     reference storage.
+
+                The default is -qnortcheck.
+
+         -qrtti[=<option>] | -qnortti (C++ only)
+                Generates run-time type identification (RTTI)
+                information for the dynamic_cast operator.
+                Generates runtime type identification (RTTI) information
+                for classes with virtual functions.
+                The available options are:
+
+                all  Generates the information needed for the RTTI
+                     typeid and dynamic_cast operators. The same as
+                     -qrtti.
+                dynamiccast
+                     Generates the information needed for the RTTI
+                     dynamic_cast operator only.
+
+                The default is -qnortti, but -qlanglvl=extended and
+                -qlanglvl=ansi turn on -qrtti.
+
+         -qsearch=<path1>[:<path2>:...:<pathN>] | -qnosearch
+                Directs the preprocessor to look for the system
+                include files in the specified directories.
+                For C, the default is -qsearch=/usr/include/.
+                For C++, the default is
+                -qsearch=/usr/include/,/usr/lpp/cbclib/include/.
+                Note: Search directories indicated by -qsearch and
+                -I flag options are appended to the installation
+                default list of search directories. To clear the
+                installation defaults, use -qnosearch followed by
+                -qsearch or -I flag options indicating desired
+                search directories.
+
+         -qsequence[={<m>:<n>}] | -qnosequence
+                Defines the section of the input record that is to
+                contain sequence numbers. The available options
+                are:
+
+                <m>  Specifies the column number of the left-hand
+                     margin. The value of <m> must be greater than
+                     0 and less than 32767.
+                <n>  Specifies the column number of the right-hand
+                     margin. The value of <n> must be greater than
+                     <m> and less than 32767. An asterisk (*)
+                     indicates the last column of the input record.
+
+                For C++, the default is -qnosequence.
+                For C(variable record format), the default is
+                -qnosequence.
+                For C (fixed record format), the default is
+                -qsequence=73:80.
+
+         -qservice[=<string>] | -qnoservice
+                Places the <string> in the object module. The
+                string is loaded into memory when the program is
+                executing. If the application fails abnormally, the
+                string is displayed in the traceback.
+                The default is -qnoservice.
+
+         -qseverity=<option>[:<msg_num>...] | -qnoseverity (C only)
+                Allows you to change the default severity level of
+                a message to a different one. The compiler uses the
+                new severity if the specified message is emitted.
+                Available severity options are:
+
+                I    Specifies the message severity level as
+                     informational.
+                W    Specifies the message severity level as
+                     warning.
+                E    Specifies the message severity level as error.
+
+                The default is -qnoseverity.
+
+         -qshowinc | -qnoshowinc
+                Includes the source of all included files in the
+                source listing, when the -qsource option is in
+                effect.
+                The default is -qnoshowinc.
+
+         -qshowmacros | -qnoshowmacros
+                Emits macro definitions to preprocessed output.
+                The available options are:
+
+                all  Emits all macro definitions to preprocessed
+                     output. This is the same as specifying
+                     -qshowmacros.
+                pre  Emits only predefined macro definitions to
+                     preprocessed output.
+                nopre
+                     Suppresses appending predefined macro
+                     definitions to preprocessed output.
+
+                The default is -qnoshowmacros.
+
+         -qskipsrc={show|hide}
+                Controls whether or not source statements skipped
+                by the compiler are shown in the listing, when the
+                -qsource option is in effect. The available options
+                are:
+
+                show   Shows all source statements in the listing.
+                hide   Omits source statements that are skipped by
+                       the compiler.
+
+                The default is -qskipsrc=show.
+
+         -qsmp[=suboption[:suboption]] | -qnosmp
+                Controls acceptance of OpenMP directives and
+                automatic parallelization of program code.
+
+                explicit | noexplicit
+                       Enables or disables directives controlling
+                       explicit parallelization of loops.
+                opt | noopt
+                       Enables or disables optimization of
+                       parallelized program code.
+
+                The default is -qnosmp.
+
+         -qsource[=<filename>] | -qnosource
+                Produces a source listing and any diagnostic
+                messages. If <filename> is specified output goes to
+                <filename> file, otherwise it goes to stdout.
+                The default is -qnosource.
+
+         -qspill=<size> | -qnospill
+                Specifies the size of the register allocation spill
+                area.
+                The default is -qspill=128.
+
+         -qsplitlist | -qnosplitlist
+                Writes the IPA Link phase listing to multiple PDS
+                members, PDSE members, or z/OS UNIX System Services
+                files.
+                The default is -qnosplitlist.
+
+         -qsql[=<DB2_opt1>:...:<DB2_optN>] | -qnosql
+                Enables the C/C++ compiler to process embedded SQL
+                statements.
+                The default is -qnosql.
+
+         -qsscomm
+                Not supported. Use -qcpluscmt instead.
+
+         -qstackprotect[=all | size=n | [no]skipspc] | -qnostackprotect
+                Provides protection against malicious code or
+                programming errors that overwrite or corrupt the
+                stack. The available suboptions are:
+
+                all  Protects all procedures whether they have
+                     vulnerable objects or not.
+                size=n
+                     Protects all procedures with vulnerable
+                     objects whose sizes are greater than or equal
+                     to n bytes. n must be an integer value that can
+                     not exceed 2**32-2. The default size is 8 bytes.
+                skipspc | noskipspc
+                     Ignores the stack protection checks if the generated
+                     code is running in SPC mode. This suboption should
+                     be specified only if the module runs in an SPC environment;
+                     otherwise, it might cause performance degradation.
+                     This suboption requires ARCH(7) or a higher level.
+                     noskipspc is the default.
+
+                The default is -qnostackprotect.
+
+         -qstart | -qnostart
+                Specifies that CEESTART is to be generated whenever
+                necessary.
+                The default is -qstart.
+
+         -qstaticinline | -qnostaticinline (C++ only)
+                Controls whether inline functions are treated as
+                having static or extern linkage.
+                The default is -qnostaticinline.
+
+         -qstrict | -qnostrict
+                Turns off aggressive optimizations which have the
+                potential to alter the semantics of a user's
+                program. In IEEE floating-point mode, -qnostrict
+                sets -qfloat=maf. -qstrict has the following
+                suboption:
+
+                subscriptwrap | nosubscriptwrap
+                       Prevents the compiler from assuming that
+                       array subscript expressions will never
+                       overflow.
+
+                For -qnooptimize and -qoptimize(2), the default is
+                -qstrict. For -qoptimize(3), the default is
+                -qnostrict.
+
+         -qstrict_induction | -qnostrict_induction
+                Turns off induction variable optimizations that
+                have the potential to alter the semantics of a
+                user's program.
+                The default is -qnostrict_induction.
+
+         -qsuppress=<msg_num> | -qnosuppress=<msg_num>
+                Prevents specific informational or warning messages
+                from being displayed or added to the listing file,
+                if one is generated.
+                For C, the default is -qnosuppress.
+                For C++, the default is
+                -qsuppress(CCN5900,CCN5922).
+
+         -qsysstate=<opt1>[:<opt2>] (C only)
+                Provides additional SYSSTATE macro parameters to
+                the SYSSTATE macro that is generated by the
+                compiler. This option is meaningful only if the
+                -qmetal and -S flag options are specified. The
+                available options are:
+
+                ascenv | noascenv
+                       Instructs the compiler to automatically
+                       generate additional SYSSTATE macros with the
+                       ASCENV parameter to reflect the ASC mode of
+                       the function. The default is noascenv.
+                osrel={none|zosvnrm}
+                       Provides z/OS release value for the OSREL
+                       parameter on the SYSSTATE macro. The default
+                       is osrel=none.
+
+         -qtarget=<opt1>[:<opt2>]
+                Generates an object module for the targeted
+                operating system or run-time library. The available
+                options are:
+
+                le     Generates object code to run under z/OS
+                       Language Environment. This is the default.
+                ims    Generates object code to run under the
+                       Information Management System (IMS)
+                       subsystem. If you are compiling the main
+                       program, you must also specify the
+                       -qplist=os option. -qtarget=ims is not
+                       supported for 64-bit compiles.
+                current
+                       Generates object code to run under the same
+                       version of z/OS with which the compiler
+                       ships. As the compiler ships with z/OS V2R4,
+                       -qtarget=current is the same as
+                       -qtarget=zosv2r4. This is the default.
+                zosv2r2
+                       Generates object code to run under z/OS
+                       Version 2 Release 2 and subsequent releases.
+                zosv2r3
+                       Generates object code to run under z/OS
+                       Version 2 Release 3 and subsequent releases.
+                zosv2r4
+                       Generates object code to run under z/OS
+                       Version 2 Release 4 and subsequent releases.
+                0xnnnnnnnn
+                       An eight-digit hexadecimal literal string
+                       that specifies an operating system level.
+
+                The default is -qtarget=le:current.
+
+         -qtempinc[=<directory>] | -qnotempinc (C++ only)
+                Generates template functions in the specified
+                directory (or the "tempinc" directory).
+                The default is -qtempinc.
+                The recommended method for handling template
+                instantiations is to use the -qtemplateregistry
+                option.
+
+         -qtemplatedepth=number (C++ only)
+                Specifies the maximum number of recursively
+                instantiated template specializations that are
+                processed by the compiler.
+                The default is -qtemplatedepth(300).
+
+         -qtemplaterecompile | -qnotemplaterecompile (C++ only)
+                Automatically recompiles source files to maintain
+                consistency with the template registry.
+                The default is -qtemplaterecompile.
+
+         -qtemplateregistry[=<filename>]
+             | -qnotemplateregistry (C++ only)
+                Generates and uses a template registry. If
+                <filename> is not specified the compiler places
+                template registry information in ./templreg.
+                The default is -qnotemplateregistry.
+
+         -qterminal | -qnoterminal
+                Directs all of the diagnostic messages of the
+                compiler to stderr.
+                The default is -qterminal.
+
+         -qtest Not supported. Use -qdebug instead.
+
+         -qthreaded | -qnothreaded
+                Indicates to the compiler whether it must generate
+                thread-safe code.
+                The default is -qthreaded.
+
+         -qtmplparse=<option> (C++ only)
+                Controls whether parsing and semantic checking are
+                applied to template definition implementations or
+                only to template instantiations. The compiler has
+                the option to produce warning or error messages.
+                The available options are:
+
+                no   Does not parse, to reduce the number of errors
+                     issued in code written for previous versions
+                     of the compiler. This is the default.
+                warning
+                     Parses template definitions and issues warning
+                     messages for semantic errors.
+                error
+                     Treats problems in template implementations as
+                     errors, even if the template is not
+                     instantiated.
+
+                The default is -qtmplparse=no.
+
+         -qtune=<option>
+                Tunes instruction selection, scheduling, and other
+                implementation-dependent performance enhancements
+                for a specific implementation of a hardware
+                architecture. The available options are:
+
+                0  Generates code that is executable on all models,
+                   but it will not be able to take advantage of
+                   architectural differences on the models
+                   specified below.
+                1  Generates code that is executable on all models
+                   but that is optimized for the following models:
+                   *  9021-520, 9021-640, 9021-660, 9021-740,
+                      9021-820, 9021-860, and 9021-900
+                   *  9021-xx1, 9021-xx2, and 9672-Rx2 (G1)
+                2  Generates code that is executable on all models
+                   but that is optimized for the following models:
+                   *  9672-Rx3 (G2), 9672-Rx4 (G3), and 2003
+                   *  9672-Rx1, 9672-Exx, and 9672-Pxx
+                3  This option generates code that is executable on
+                   all models but that is optimized for the
+                   following and follow-on models: 9672-Rx5 (G4),
+                   9672-xx6 (G5), and 9672-xx7 (G6).
+                4  Generates code that is executable on all models
+                   but that is optimized for the model 2064-100
+                   (z/900).
+
+                5  Generates code that is executable on all models
+                   but that is optimized for the model 2064-100
+                   (z/900) in z/Architecture mode.
+                6  Generates code that is executable on all models,
+                   but is optimized for the 2084-xxx (z990) models.
+                7  Generates code that is executable on all models,
+                   but is optimized for the 2094-xxx (IBM System z9
+                   EC) and 2096-xxx (IBM System z9 BC) models.
+                8  Generates code that is executable on all system
+                   machine models, but is optimized for the 2097-
+                   xxx (IBM System z10 EC) and 2098-xxx (IBM System
+                   z10 BC) models.
+                9  Generates code that is executable on all system
+                   machine models, but is optimized for the 2817-
+                   xxx (IBM zEnterprise 196 (z196)) and 2818-xxx
+                   (IBM zEnterprise 114 (z114)) models.
+                10 Generates code that is executable on all system machine models,
+                   but is optimized for the 2827-xxx (IBM zEnterprise
+                   EC12 (zEC12)) and 2828-xxx (IBM zEnterprise BC12
+                   (zBC12)) models.
+                11 Generates code that is executable on all system
+                   machine models, but is optimized for the 2964-
+                   xxx (IBM z13 (z13)) and 2965-xxx (IBM z13s
+                   (z13s)) models.
+                12 This option generates code that is executable on
+                   all models, but is optimized for the 3906-xxx
+                   (IBM z14 (z14)) and 3907-xxx (IBM z14 Model ZR1) models.
+                13 This option generates code that is executable on
+                   all models, but is optimized for the 8561-xxx (IBM
+                   z15) models.
+
+                The default is -qtune=10.
+
+                If the -qtune level is lower than the specified
+                -qarch level, the compiler forces -qtune to match
+                the -qarch level or uses the default -qtune level,
+                whichever is greater.
+
+         -qundefine
+                Not supported. Use -U flag option instead.
+
+         -qunroll[={yes|no|auto|n}] | -qnounroll
+                Unrolls inner loops as follows:
+
+                yes  A hint for the compiler to try to unroll
+                     loops.
+                no   Forces the compiler not to unroll any loops.
+                auto Lets the compiler decide whether to unroll
+                     loops.
+                n    Indicates n-1 replications of the loop body or
+                     full unrolling of the loop. The value of n
+                     must be a positive integer.
+
+                The default is -qunroll=auto.
+
+         -qupconv | -qnoupconv (C only)
+                Instructs the compiler to follow unsignedness
+                preserving rules when doing C type conversions.
+                The default is -qnoupconv.
+
+         -qvector[={type|notype}:{autosimd|noautosimd}] | -qnovector
+                For a runtime environment that supports vector
+                instructions, this option can be specified to
+                control whether the compiler enables the vector
+                programming support and automatically takes
+                advantage of vector instructions.
+
+                type | notype
+                     Enables the support for vector data types, in
+                     addition to __vector data types. The default
+                     is notype.
+                autosimd | noautosimd
+                     Enables the automatic SIMDization or automatic
+                     vectorization optimization that uses Single
+                     Instruction Multiple Data (SIMD) instructions
+                     where possible, which calculate several
+                     results at one time and is faster than
+                     calculating each result sequentially. This
+                     optimization is available only when HOT is in
+                     effect. The default is noautosimd.
+
+                The default is -qnovector.
+
+         -qwarn0x | -qnowarn0x (C++11 only)
+                Controls whether to inform users with messages
+                about differences in their programs caused by
+                migration from the C++98 standard to the C++11
+                standard.
+                The default is -qnowarn0x.
+
+         -qwarn64 | -qnowarn64
+                Enables checking for possible data conversion
+                problems between 32-bit and 64-bit compiler modes.
+                The default is -qnowarn64.
+
+         -qwsizeof | -qnowsizeof
+                Returns the size of the widened type for function
+                return types instead of the size of the original
+                return type.
+                The default is -qnowsizeof.
+
+         -qxplink[=<opt1>:...:<optN>] | -qnoxplink
+                Generates extra performance linkage for subroutine
+                calls. The available options are:
+
+                backchain | nobackchain
+                     Generates a prolog that saves information
+                     about the calling function in the stack frame
+                     of the called function.
+                callback | nocallback
+                     Enables function pointer calls across XPLINK
+                     DLLs and non-XPLINK programs.
+                guard | noguard
+                     Generates an explicit check for stack
+                     overflow, which enables the storage run-time
+                     option.
+                storeargs | nostoreargs
+                     Generates code to store arguments that are
+                     normally only passed in registers, into the
+                     caller's argument area.
+                oscall={nostack|upstack|downstack}
+                     Uses the linkage as specified in this
+                     suboption for any #pragma linkage(identifier,OS)
+                     calls in your application. The available
+                     linkages are:
+                     nostack
+                          OS_NOSTACK
+                     upstack
+                          OS_UPSTACK
+                     downstack
+                          OS_DOWNSTACK
+
+                The default is -qnoxplink.
+
+         -qxref[=full] | -qnoxref
+                Produces a cross-reference listing.  definition,
+                line definition, reference, and modification
+                information for each symbol, and the external
+                symbol cross reference and static map.
+                (C) A separate offset listing of the variables
+                appears after the cross reference table.
+                The default is -qnoxref.
+
+COPYRIGHT
+         z/OS V2.4 XL C/C++
+
+         Licensed Materials - Property of IBM
+
+         5650-ZOS Copyright IBM Corp. 2004, 2019.
+
+         US Government Users Restricted Rights - Use, duplication
+         or disclosure restricted by GSA ADP Schedule Contract with
+         IBM Corp.

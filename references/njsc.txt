@@ -1,0 +1,677 @@
+
+  IBM SDK for Node.js - zOS, V12.0
+
+
+  NAME
+         njsc, njsc++ - invoke the IBM C/C++ compiler.
+
+  SYNOPSIS
+         njsc     [ option | inputfile ] ...
+         njsc++   [ option | inputfile ] ...
+
+  DESCRIPTION
+         Any of the commands listed above can be used to compile C
+         and C++ source files. They also process Assembler source
+         files and object files. Unless the -c option is specified,
+         the njsc utility invokes the binder to produce a single
+         executable file or a DLL.
+
+         An input file may have any of the following
+         default suffixes:
+
+         .C     = C++ source file
+         .c     = C source file
+         .i     = preprocessed C or C++ source file
+         .o     = object file for the binder link
+         .s     = Assembler source file
+         .a     = archive library
+         .p     = prelinker output file
+         .x     = definition side file (sidedeck)
+
+  OPTIONS
+         Options can be flag options or keyword options:
+
+  Flag options
+
+         -#     Displays language processing commands but does not
+                invoke them; output goes to stdout.
+
+         -+     Treats .c files as C++ source code.
+
+         -C     Preserves comments in preprocessed output, if used
+                with -E or -P.
+
+         -c     Does not send object files to the link editor.
+
+         -D<name>[=[<def>]]
+                Defines <name> as in the #define directive.
+                -D<name>= (no definition) is equivalent to:
+                #define <name>.
+                -D<name> (no = and no definition) is equivalent to:
+                #define <name> 1.
+
+         -E     Preprocesses but does not compile; output goes to
+                stdout.
+
+         -e     Sets the entry name for an executable.
+
+         -F{<filename>|<filename>:<stanza>|:<stanza>}
+                Uses the specified stanza of the specified
+                configuration file.  If :<stanza> is omitted, the
+                command name is used.  If <filename> is omitted the
+                default configuration file is used.
+
+         -g     Generates information for debugging tools. The
+                information is produced in DWARF format. The -g
+                option is equivalent to -qdebug=level=0, and it
+                forces -qnooptimize.
+
+         -I<dir>
+                Searches in directory <dir> for include files that
+                do not start with an absolute path.
+
+         -L<dir>
+                Searches in directory <dir> for files specified by
+                -l<key>.
+
+         -l<key>
+                Searches the file lib<key>.a for static linking.
+
+         -M     Generates a make dependency file.
+
+         -MD    Equivalent to -M -MF file, except -E is not implied. If -o is also
+                specified it's argument is used as the file but with suffix of .d,
+                otherwise the name of the input file is used, by removing directory
+                components and replacing any suffix with a .d suffix.
+
+                If -MD is used with -E, the -o argument specifies the preprocessing
+                output file (see -MF), otherwise the -o argument specifes a target
+                object file. Since -E is not implied, -MD can be used to generate a
+                dependency output file as a side effect of the compilation process.
+
+
+         -MF<file_name>
+                Provides a path name of a file in which the
+                compiler should emit dependency information when
+                the -M option is in effect. <file_name> identifies
+                the make dependency file. It can be a UNIX System
+                Services file name, an existing directory name with
+                write permission, or a directory followed by a file
+                name.
+
+         -MG    Instructs the compiler to include missing header
+                files into the make dependency output file when the
+                -M option is in effect.
+
+         -MM    Like -M but without header files found in system header directories
+                or headers included, directly or indirectly, from such a headers.
+                This implies that the choice of angle brackets or double quotes in an
+                #include directive does not in itself determine whether that header
+                appears in -MM dependency output.
+
+         -MMD   Like -MD except mention only user header files, not system header files.
+
+         -MP    Add a phony target for each dependency other than the main file
+                in the make dependency file, causing each to depend on nothing.
+
+         -MQ<target_name>
+                Sets the target to the <target_name> and escapes
+                any characters that have special meaning in make.
+
+         -MT<target_name>
+                Sets the target to the <target_name> rather than
+                the object file name when the -M option is in
+                effect.
+
+         -O     Optimizes generated code.
+
+         -O2    Same as -O.
+
+         -O3    Performs some memory and compile time intensive
+                optimizations in addition to those executed with
+                -O2.  The -O3 specific optimizations have the
+                potential to alter the semantics of a user's
+                program.  The compiler guards against these
+                optimizations at -O2 and the option -qstrict is
+                provided at -O3 to turn off these aggressive
+                optimizations.
+
+         -o<name>
+                Names the executable file <name> instead of a.out.
+                When used with the -c option and one source file,
+                names the object file <name> instead of filename.o.
+
+         -P     Preprocesses but does not compile; output goes to a
+                file whose name is based on the source file name
+                and has a suffix .i for preprocessed output.
+
+         -r     Produces a relocatable object.
+
+         -s     Strips the symbol table, line number information,
+                and relocation information from the output file.
+
+         -U<name>
+                Undefines <name> as in the #undef directive.
+
+         -V     Reports the progress of compilation, by naming the
+                programs being invoked and the options being
+                specified to each program. Information is displayed
+                in a space-separated list.
+
+         -v     Reports the progress of compilation, by naming the
+                programs being invoked and the options being
+                specified to each program. Information is displayed
+                in a comma-separated list.
+
+         -W<x>,<option1>,<option2>,...
+                Gives the specified options to the program <x>
+                where x can be one of the following:
+
+                a = Assembler
+                c = compiler
+                l = binder
+
+  Keyword options
+         Keyword options are specified using the following syntax:
+
+         -q<option>[=<parm>[=<value>][:<parm>[=<value>]]...]
+
+         where <option> is an option name, <parm> is a suboption
+         name, and <value> is the suboption value.
+
+         Keyword options with no parameters represent switches that
+         can be either on or off. The keyword by itself turns the
+         switch on, and the keyword preceded by the letters NO
+         turns the switch off. For example, -qLIST tells the
+         compiler to produce a listing and -qNOLIST tells the
+         compiler not to produce a listing. If an option that
+         represents a switch is set more than once, the compiler
+         uses the last setting.
+
+         Keyword option and parameter names may appear in mixed
+         case letters in the invocation command.
+
+         -qansialias | -qnoansialias
+                Indicates to the compiler that the code strictly
+                follows the type-based aliasing rule in the ISO C
+                and C++ standards, and can therefore be compiled
+                with higher performance optimization.
+                The default is -qansialias.
+
+         -qarch=<option>
+                Specifies the machine architecture for which the
+                executable program instructions are to be
+                generated.
+                The available options are:
+
+                                5  Produces code that uses instructions available
+                   on the 2064-xxx (z/900) and 2066-xxx (z800)
+                   models in z/Architecture mode.
+                6  Produces code that uses instructions available
+                   on the 2084-xxx (z990) and 2086-xxx (z890)
+                   models in z/Architecture mode.
+                7  Produces code that uses instructions available
+                   on the 2094-xxx (IBM System z9 EC) and 2096-xxx
+                   (IBM System z9 BC) models in z/Architecture mode
+                8  Produces code that uses instructions available
+                   on the 2097-xxx (IBM System z10 EC) and 2098-xxx
+                   (IBM System z10 BC) models in z/Architecture
+                   mode.
+                9  Produces code that uses instructions available
+                   on the 2817-xxx (IBM zEnterprise 196 (z196)) and
+                   2818-xxx (IBM zEnterprise 114 (z114)) models in
+                   z/Architecture mode.
+                10 This is the default option. Produces code that
+                   uses instructions available on the 2827-xxx (IBM
+                   zEnterprise EC12 (zEC12)) and 2828-xxx (IBM
+                   zEnterprise BC12 (zBC12))models in
+                   z/Architecture mode.
+                11 Produces code that uses instructions available
+                   on the 2964-xxx (IBM z13 (z13)) and 2965-xxx
+                   (IBM z13s (z13s)) models in z/Architecture mode.
+                                12 Produces code that uses instructions available
+                   on the 3906-xxx (IBM z14 (z14)) and 3907-xxx
+                   (IBM z14 ZR1) models in z/Architecture mode.
+
+                The default is -qarch=10.
+
+         -qascii | -qnoascii
+                Enables your application to process ASCII data
+                natively at execution time.
+                The default is -qnoascii.
+
+         -qasm | -qnoasm
+                 -fasm | -fnoasm
+                Enables embedded assembler source inside C/C++
+                programs.
+                The default is -qnoasm.
+
+         -qasmlib=<path1>[:<path2>:...:<pathN>] | -qnoasmlib
+                Specifies assembler macro libraries to be used when
+                assembling the assembler source code.
+                The default is -qnoasmlib.
+
+         -qassert={restrict|norestrict}
+                Enables/disables optimization for restrict
+                qualified pointers. The suboption restrict enables,
+                while norestrict disables optimization for restrict
+                qualified pointers.
+                The default is -qassert=restrict.
+
+         -qchars={signed|unsigned}
+                 -fsigned-char|-funsigned-char
+                Determines whether all variables of type char are
+                treated as either signed or unsigned.
+                The default is -qchars=unsigned.
+
+         -qcompact | -qnocompact
+                Avoids optimizations that increase object file size.
+                The default is -qnocompact.
+
+         -qcompress | -qnocompress
+                Suppresses the generation of function names in the
+                function control block to reduce the size of the
+                application's load module.
+                The default is -qnocompress.
+
+         -qcsect[=[<qualifier>]] | -qnocsect
+                Ensures that the code, static data, and test
+                sections of the object module are named based on
+                <qualifier>, or if the <qualifier> is not
+                specified, using a default scheme.  The default is
+                -qcsect.
+
+         -qdebug[=<opt1>:...:<optN>] | -qnodebug
+                Instructs the compiler to generate debug
+                information. The available options are:
+
+                                format=dwarf
+                     Specifies the format of debug information. DWARF
+                                         is the only format supported.
+
+                file | nofile
+                     Controls whether the DWARF debugging
+                     information is stored in a separate debug
+                     file. The output file can be a z/OS UNIX
+                                         file or a z/OS UNIX System Services directory.
+                     The NOFILE suboption instructs the compiler to
+                                         place the debugging information in the GOFF NOLOAD
+                     classes in the object file instead of a
+                     separate debug side file.
+
+                                         The default is -qnodebug.
+
+         -qdigraph | -qnodigraph
+                Enables recognition of digraph key combinations or
+                keywords to represent characters not found on some
+                keyboards.
+                The default is -qdigraph.
+
+         -qexportall | -qnoexportall
+                Exports all external functions and variables in the
+                compilation unit so that a DLL application can use
+                them.
+                The default is -qnoexportall.
+
+         -qfloat=<opt1>[:<opt2>:...:<optN>]
+                Selects different strategies for speeding up or
+                improving the accuracy of floating-point
+                calculations, or selecting the format of the
+                floating point types. The available options are:
+
+                ieee Generates binary floating-point numbers and
+                     instructions.
+                fold | nofold
+                     Suppresses compile-time evaluation of constant
+                     floating-point expressions.
+                     The default is fold.
+                maf | nomaf
+                     Suppresses generation of multiply-add
+                     instructions.
+                     The default is nomaf.
+                rrm | norrm
+                     Specifies run-time rounding mode. Compile with
+                     this option if the run-time rounding mode is
+                     round toward minus infinity, round toward
+                     positive infinity, or not known.
+                     The default is norrm.
+                afp | noafp
+                     Generates code which uses the full complement
+                     of 16 floating point registers.
+
+                The default for -qarch=5 and higher is:
+                     -qfloat=fold:nomaf:norrm:afp
+
+         -qgonumber | -qnogonumber
+                Generates line number tables that correspond to the
+                input source file for Debug Tool and CEEDUMP
+                processing.
+                If -qdebug is specified, the default is -qgonumber,
+                otherwise it is -qnogonumber.
+
+         -qhalt=<num>
+                The compilation stops if the return code
+                                is greater than or equal to <num>. See
+                                z/OS XL C/C++ Messages for a list of return codes.
+                The default is -qhalt=16.
+
+         -qignerrno | -qnoignerrno
+                Allows the compiler to perform optimizations that
+                assume errno is not used by the application.
+                The default is -qnoignerrno.
+
+         -qinclude=<file> | -qnoinclude
+                Specifies additional header files to be included in
+                a compilation unit, as though the files were named
+                in consecutive #include statements inserted before
+                the first line of the source file.
+                -qnoinclude ignores all the files specified with
+                the -qinclude option prior to the -qnoinclude
+                option.
+                The default is -qnoinclude.
+
+         -qinline | -qnoinline
+                Attempts to inline functions instead of generating calls
+                to those functions, for improved performance.  -qinline
+                turns on inlining. -qnoinline turns off inlining.
+
+                If -qnooptimize is specified, the default is -qnoinline;
+                otherwise, the default is -qinline.
+
+         -qlanglvl=<langlvl>[:<langlvl>]...
+                 -std=<langlvl>[:<langlvl>]...
+                Determines whether source code and compiler options
+                should be checked for conformance to a specific
+                language standard, or subset, or superset of a
+                standard.
+
+                                Suboptions for C++ include:
+                                o -qlanglvl=c++11 or -std=c++11
+                                o -qlanglvl=gnu++11 | extended0x or -std=gnu++11
+                                o -qlanglvl=c++14 or -std=c++14
+                                o -qlanglvl=gnu++14 or -std=gnu++14
+
+                                Suboptions for C include:
+                                o -qlanglvl=c89 | stdc89 | ansi or -std=c89
+                                o -qlanglvl=gnu89 | extc89 | extended or -std=gnu89
+                                o -qlanglvl=c99 or -std=c99
+                                o -qlanglvl=gnu99 | extc99 or -std=gnu99
+                                o -qlanglvl=c11 | stdc11 or -std=c11
+                                o -qlanglvl=gnu11 | extc11 or -std=gnu11
+
+         -qlibansi | -qnolibansi
+                Assumes that all functions with the name of an ANSI
+                C library function are in fact the system
+                functions.
+                The default is -qnolibansi.
+
+         -qlist[=<filename>] | -qnolist
+                Produces a compiler listing that includes a pseudo
+                assembly listing. If <filename> is specified output
+                goes to <filename> file, otherwise it goes to
+                stdout.
+                The default is -qnolist.
+
+         -qmakedep[={gcc|pponly}]
+                Generates a make dependency file. Specifying this
+                option with no suboption is equivalent to specifying
+                the -M option. This option is available only when
+                using -q syntax. The available suboptions are:
+
+                gcc  Instructs the compiler to produce make
+                     dependency file format with a single rule for
+                     all dependencies. The default format uses
+                     multiple rules, one for each dependency.
+                pponly
+                     Instructs the compiler to produce only the
+                     make dependency files without generating an
+                     object file, with the same make dependency
+                     file format as the format produced by the gcc
+                     suboption.
+
+         -qmaxmem=<num>
+                Limits the amount of memory used by certain
+                memory-intensive optimizations to <num> kilobytes.
+                The default is -qmaxmem=2097152.
+
+         -qmemory | -qnomemory
+                Improves compile-time performance by using a memory
+                file in place of a temporary work file, if
+                possible.
+                The default is -qmemory.
+
+         -qoffset | -qnooffset
+                Displays the offset addresses relative to the entry
+                point or start of each function in the pseudo-
+                assembly listing.
+                The default is -qnooffset.
+
+         -qoptfile=<filename> | -qnooptfile
+                Looks for compiler options in the file specified by
+                the <filename> suboption.
+                The default is -qnooptfile.
+
+         -qoptimize[=<level>] | -qnooptimize
+                Enables different levels of optimization. The
+                available levels are:
+
+                0  (zero) same as -qnooptimize.
+                2  Same as -O and -qoptimize.
+                3  Same as -O3. Aggressive optimization.
+
+                The default is -qnooptimize.
+
+         -qphaseid
+                The same as -qphsinfo.
+
+         -qphsinfo | -qnophsinfo
+                                Issues an informational message for each compiler
+                                component (phase) as the phase begins execution.
+                                The message displays phase name, product
+                                identification, and build level.
+                                The default is -qnophsinfo.
+
+         -qro | -qnoro
+                Puts string literals in read-only storage.
+                The default is -qro.
+
+         -qroconst | -qnoroconst
+                Puts constant values in read-only storage.
+                The default is -qnoroconst for C compiles, and
+                -qroconst for C++ compiles.
+
+         -qrtcheck[=<option>] | -qnortcheck
+                Generates compare-and-trap instructions that
+                perform certain types of runtime checking. The
+                available options are:
+
+                all  Automatically generates compare-and-trap
+                     instructions for all possible runtime checks.
+                bounds | nobounds
+                     Performs runtime checking of addresses when
+                     subscripting within an object of known size.
+                divzero | nodivzero
+                     Performs runtime checking of integer division.
+                nullpr | nonullptr
+                     Performs runtime checking of addresses
+                     contained in pointer variables used to
+                     reference storage.
+
+                The default is -qnortcheck.
+
+         -qrtti | -qnortti (C++ only)
+                 -frtti | -fnortti (C++ only)
+                Generates run-time type identification (RTTI)
+                information for the dynamic_cast operator. Generates
+                                runtime type identification (RTTI) information for
+                                classes with virtual functions.
+
+                The default is -qrtti or -frtti.
+
+         -qservice[=<string>] | -qnoservice
+                Places the <string> in the object module. The
+                string is loaded into memory when the program is
+                executing. If the application fails abnormally, the
+                string is displayed in the traceback.
+                The default is -qnoservice.
+
+         -qshowmacros | -qnoshowmacros
+                Emits macro definitions to preprocessed output.
+
+                The default is -qnoshowmacros.
+
+         -qspill=<size> | -qnospill
+                Specifies the size of the register allocation spill
+                area.
+                The default is -qspill=128.
+
+         -qstackprotect[=all | size=n] | -qnostackprotect
+                Provides protection against malicious code or
+                programming errors that overwrite or corrupt the
+                stack. The available suboptions are:
+
+                all  Protects all procedures whether they have
+                     vulnerable objects or not.
+                size=n
+                     Protects all procedures with vulnerable
+                     objects whose sizes are greater than or equal
+                     to n bytes. n must be an integer value that can
+                                         not exceed 2**32-2. The default
+                     size is 8 bytes.
+
+                The default is -qnostackprotect.
+
+         -qstrict | -qnostrict
+                Turns off aggressive optimizations which have the
+                potential to alter the semantics of a user's
+                program. In IEEE floating-point mode, -qnostrict
+                sets -qfloat=maf. -qstrict has the following
+                suboption:
+
+                subscriptwrap | nosubscriptwrap
+                       Prevents the compiler from assuming that
+                       array subscript expressions will never
+                       overflow.
+
+                For -qnooptimize and -qoptimize(2), the default is
+                -qstrict. For -qoptimize(3), the default is
+                -qnostrict.
+
+         -qstrict_induction | -qnostrict_induction
+                Turns off induction variable optimizations that
+                have the potential to alter the semantics of a
+                user's program.
+                The default is -qnostrict_induction.
+
+         -qsyntaxonly
+                 -fsyntax-only
+                Performs syntax checking without generating an
+                                object file.
+
+         -qtemplatedepth=number (C++ only)
+                 -ftemplate-depth=number (C++ only)
+                Specifies the maximum number of recursively
+                instantiated template specializations that are
+                processed by the compiler.
+                The default is -qtemplatedepth(300).
+
+         -qthreaded | -qnothreaded
+                Indicates to the compiler whether it must generate
+                thread-safe code.
+                The default is -qthreaded.
+
+         -qtune=<option>
+                Tunes instruction selection, scheduling, and other
+                implementation-dependent performance enhancements
+                for a specific implementation of a hardware
+                architecture. The available options are:
+
+                5  Generates code that is executable on all models
+                   but that is optimized for the model 2064-100
+                   (z/900) in z/Architecture mode.
+                6  Generates code that is executable on all models,
+                   but is optimized for the 2084-xxx (z990) models.
+                7  Generates code that is executable on all models,
+                   but is optimized for the 2094-xxx (IBM System z9
+                   EC) and 2096-xxx (IBM System z9 BC) models.
+                8  Generates code that is executable on all system
+                   machine models, but is optimized for the 2097-
+                   xxx (IBM System z10 EC) and 2098-xxx (IBM System
+                   z10 BC) models.
+                9  Generates code that is executable on all system
+                   machine models, but is optimized for the 2817-
+                   xxx (IBM zEnterprise 196 (z196)) and 2818-xxx
+                   (IBM zEnterprise 114 (z114)) models.
+                10 This option is the default. Generates code that
+                   is executable on all system machine models, but
+                   is optimized for the 2827-xxx (IBM zEnterprise
+                   EC12 (zEC12)) and 2828-xxx (IBM zEnterprise BC12
+                   (zBC12)) models.
+                11 Generates code that is executable on all system
+                   machine models, but is optimized for the 2964-
+                   xxx (IBM z13 (z13)) and 2965-xxx (IBM z13s
+                   (z13s)) models.
+                12 This option generates code that is executable on
+                   all models, but is optimized for the 3906-xxx
+                   (IBM z14 (z14)) models.
+
+                If the -qtune level is lower than the specified
+                -qarch level, the compiler forces -qtune to match
+                the -qarch level or uses the default -qtune level,
+                whichever is greater.
+
+         -qunroll[={yes|no|auto|n}] | -qnounroll
+                Unrolls inner loops as follows:
+
+                yes  A hint for the compiler to try to unroll
+                     loops.
+                no   Forces the compiler not to unroll any loops.
+                auto Lets the compiler decide whether to unroll
+                     loops.
+                n    Indicates n-1 replications of the loop body or
+                     full unrolling of the loop. The value of n
+                     must be a positive integer.
+
+                The default is -qunroll=auto.
+
+  Supported GCC options
+         -faccess-control
+                 -fasm, -fno-asm (synonym for -qasm)
+                 -fbracket-depth
+                 -fcolor-diagnostics
+                 -fconstexpr-depth
+                 -fdiagnostics-fixit-info
+                 -fdiagnostics-format=[clang|msvc|vi]
+                 -fdiagnostics-print-source-range-info
+                 -fdiagnostics-show-category=[none|id|name]
+                 -fdiagnostics-show-option
+                 -felide-type
+                 -fexec-charset
+                 -ffreestanding
+                 -fhosted
+                 -fgnu-keywords
+                 -fgnu89-inline
+                 -fmessage-length
+                 -foperator-names
+         -frtti (synonym for -qrtti)
+         -fsigned-char (synonym for -qchars=signed)
+         -fshow-column
+         -fshow-source-location
+                 -fsyntax-only (synonym for -fsyntax-only)
+                 -ftemplate-backtrace-limit
+                 -ftemplate-depth (synonym for -qtemplatedepth)
+                 -funsigned-char (synonym for -qchars=unsigned)
+                 -isystem
+                 -pedantic
+                 -W
+
+COPYRIGHT
+         IBM SDK for Node.js - zOS, V12.0
+
+         Licensed Materials - Property of IBM
+
+         5655-NJS Copyright IBM Corp. 2017, 2019.
+
+         US Government Users Restricted Rights - Use, duplication
+         or disclosure restricted by GSA ADP Schedule Contract with
+         IBM Corp.
