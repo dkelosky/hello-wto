@@ -1,0 +1,4 @@
+# pattern local-encoding remote-encoding
+node_modules -
+.gitignore -
+package-lock* -

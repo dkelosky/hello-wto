@@ -1,9 +1,9 @@
 {
   "targets": [
     {
-      "target_name": "hello",
+      "target_name": "wto",
       "sources": [ 
-        "hello.cc",
+        "wto.cc",
       ]
     }
   ]

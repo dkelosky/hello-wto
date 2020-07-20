@@ -1,14 +1,21 @@
 {
-  "name": "hello_world",
+  "name": "wto",
   "version": "0.0.0",
   "description": "Node.js Addons Example #1",
-  "main": "hello.js",
+  "main": "wto.js",
   "private": true,
   "dependencies": {
     "bindings": "~1.2.1"
   },
   "scripts": {
-    "test": "node hello.js"
+    "install": "ignoring install scripts",
+    "setup:configure": "zowe uss issue ssh \"cd /a/kelda16/native/node/hello-wto && node-gyp configure\"",
+    "setup:makefile": "zowe files upload ftu './/build//Makefile' '//a//kelda16//native//node//hello-wto//build//Makefile' --binary",
+    "setup": "npm run setup:configure && npm run setup:makefile",
+    "remote:build:wtoexec": "zowe uss issue ssh \"cd /a/kelda16/native/node/hello-wto && make wtoexec.o && cp wtoexec.o build\"",
+    "remote:build:wto": "zowe uss issue ssh \"cd /a/kelda16/native/node/hello-wto && node-gyp build\"",
+    "remote:build": "npm run remote:build:wtoexec && npm run remote:build:wto",
+    "upload": "zowe files upload dtu './/' '//a//kelda16//native//node//hello-wto' --attributes=.zosattributes"
   },
   "gypfile": true,
   "devDependencies": {
