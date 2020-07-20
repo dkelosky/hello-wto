@@ -35,16 +35,22 @@ napi_value Method(napi_env env, napi_callback_info info) {
   size_t read;
   status = napi_get_value_string_utf8(env, args[0], buffer, sizeof(buffer), &read);
   assert(status == napi_ok);
+  __atoe(buffer); // convert yo EBCDIC
 
-  __atoe(buffer);
-  int value = 3;
-  WTOEXE(&value, buffer);
-
-  napi_value world;
-  status = napi_create_string_utf8(env, "world", 5, &world);
+  int value = 0;
+  status = napi_get_value_int32(env, args[1], &value);
   assert(status == napi_ok);
 
-  return world;
+  int rc = 0;
+  rc = WTOEXE(&value, buffer);
+
+  // napi_value world;
+  // status = napi_create_string_utf8(env, "world", 5, &world);
+  napi_value returnCode;
+  status = napi_create_int32(env, rc, &returnCode);
+  assert(status == napi_ok);
+
+  return returnCode;
 }
 
 #define DECLARE_NAPI_METHOD(name, func)                          \

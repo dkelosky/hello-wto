@@ -2,6 +2,14 @@
 
 This project demonstrates calling HLASM/Metal C from Node.js.  It is a work in progress (much could be cleaned up to make this process smoother).
 
+```JavaScript
+var addon = require('bindings')('wto');
+
+console.log(addon.wto("hello from node.js", 123));
+```
+
+![Node.js Hello WTO](./doc/images/hello-wto.png)
+
 ## Prereq
 
 `npm install -g @zowe/cli`
