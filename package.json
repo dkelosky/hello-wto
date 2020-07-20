@@ -15,7 +15,10 @@
     "remote:build:wtoexec": "zowe uss issue ssh \"cd /a/kelda16/native/node/hello-wto && make wtoexec.o && cp wtoexec.o build\"",
     "remote:build:wto": "zowe uss issue ssh \"cd /a/kelda16/native/node/hello-wto && node-gyp build\"",
     "remote:build": "npm run remote:build:wtoexec && npm run remote:build:wto",
-    "upload": "zowe files upload dtu './/' '//a//kelda16//native//node//hello-wto' --attributes=.zosattributes"
+    "run": "zowe uss issue ssh \"cd /a/kelda16/native/node/hello-wto && node wto.js\"",
+    "upload": "zowe files upload dtu './/' '//a//kelda16//native//node//hello-wto' --attributes=.zosattributes",
+    "upload:wtojs": "zowe files upload ftu 'wto.js' '//a//kelda16//native//node//hello-wto//wto.js'",
+    "upload:wtocc": "zowe files upload ftu 'wto.cc' '//a//kelda16//native//node//hello-wto//wto.cc'"
   },
   "gypfile": true,
   "devDependencies": {

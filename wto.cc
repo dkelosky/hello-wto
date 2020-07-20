@@ -34,7 +34,7 @@ napi_value Method(napi_env env, napi_callback_info info) {
   char buffer[100] = {0};
   size_t read;
   status = napi_get_value_string_utf8(env, args[0], buffer, sizeof(buffer), &read);
-
+  assert(status == napi_ok);
 
   __atoe(buffer);
   int value = 3;
