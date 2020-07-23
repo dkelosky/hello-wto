@@ -1,3 +1,5 @@
 var addon = require('bindings')('wto');
 
-console.log(addon.wto("hello from node.js", 123));
+var rc = addon.wto("hello from node.js", 123);
+
+console.log(`wto rc is ${rc}`);
